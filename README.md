@@ -88,9 +88,9 @@ El workflow también se ejecuta automáticamente cada 30 minutos y cuando cambia
 La API usa `videos.list` para obtener estadísticas.
 
 - Cada lote de hasta 50 IDs cuesta 1 unidad de cuota.
-- 36 videos caben en una sola llamada.
+- Hasta 50 IDs caben en una sola llamada.
 - La cuota estándar gratuita de YouTube Data API es de 10.000 unidades/día.
-- Con 36 IDs, cada actualización programada usa 1 unidad.
+- Con los 35 vídeos actuales, cada actualización programada usa 1 unidad.
 
 ## Seguridad y datos
 

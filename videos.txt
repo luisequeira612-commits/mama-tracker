@@ -1,8 +1,10 @@
 # MAMA 2026 — Day 1
 # Formato: Artista | URL o ID | canciones | collab
 # Solo IDs confirmados. No inventar IDs.
+# BABYMONSTER incluye su actuación propia y la colaboración con Street World Fighter.
 
 BABYMONSTER | iIaw6HvS09Y | 2
+BABYMONSTER | 3JvKNtTN3jk | 3 | collab
 ENHYPEN | rBbQ32y7Xm0 | 1
 ENHYPEN | glURXZmyTI8 | 2
 ENHYPEN | mYuGfSa1E6A | 1
@@ -21,7 +23,21 @@ PANIC X GUESTS | BEOkuAZwfXg | 1 | collab
 LNGSHOT X MODYSSEY X TUIDE | 2UitQkvkNqI | 1 | collab
 LNGSHOT X MODYSSEY X TUIDE | zWcqximR6T0 | 1 | collab
 LNGSHOT X MODYSSEY X TUIDE | 0lJNbLrUecg | 4 | collab
-BABYMONSTER X STREET WORLD FIGHTER | 3JvKNtTN3jk | 3 | collab
 CL X ALLDAY PROJECT | _Kfx4L0p3SI | 5 | collab
 PANIC X GUESTS | fyBnlSRxySg | 2 | collab
 ENHYPEN | n9iu72mjil0 | 4
+
+# Cortes individuales oficiales de Mnet K-POP (@Mnet).
+# songs=0 en estos cortes porque las canciones ya se cuentan en el video completo del mismo acto.
+RESCENE | FzC51U9aB4s | 0
+RESCENE | Nja097GTVXE | 0
+ALPHA DRIVE ONE | mfzws4hBQ5Q | 0
+ALPHA DRIVE ONE | USErbT-TpMs | 0
+Hearts2Hearts | i6bW_HTcYeM | 0
+Hearts2Hearts | sLYoWIWTZ8U | 0
+NCT WISH | NwgEZfm9VFs | 0
+NCT WISH | f0BiLdY8LDE | 0
+ILLIT | _IX6zWGr9gk | 0
+ILLIT | 26Jb6BZ2ga4 | 0
+TREASURE | 5jnLmnb7dZk | 0
+TREASURE | G0jizVgFNIM | 0
