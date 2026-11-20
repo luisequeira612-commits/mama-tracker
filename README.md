@@ -4,9 +4,11 @@ Tracker personal de reproducciones en YouTube para MAMA 2026 — Day 1.
 
 ## Qué hace
 
-- Agrupa videos por artista ignorando mayúsculas/minúsculas y espacios extra.
+- Agrupa vídeos por acto principal ignorando mayúsculas/minúsculas y espacios extra.
 - Suma las vistas actuales de todos los videos configurados.
-- Cuenta canciones, videos y colaboraciones.
+- Cuenta canciones únicas atribuidas, vídeos y colaboraciones.
+- Cada vídeo se cuenta una sola vez; los cortes de canciones ya contabilizadas usan `songs=0` para evitar duplicar el contador de canciones.
+- Las colaboraciones se atribuyen a un acto principal para evitar filas duplicadas; se marcan con `collab`.
 - Ordena los actos por vistas y destaca el #1.
 - Actualiza `docs/stats.json` cada 30 minutos mediante GitHub Actions.
 - La página refresca los datos cada 5 minutos.
@@ -55,9 +57,11 @@ https://luisequeira612-commits.github.io/mama-tracker/
 
 Edita `videos.txt`.
 
+Inventario verificado de Chapter 1: **36 vídeos únicos y 14 actos principales**. BABYMONSTER figura con **2 canciones, 2 vídeos y 1 colaboración**. El vídeo independiente `DOCKING COMPLETE` de Street World Fighter está separado de la colaboración con BABYMONSTER.
+
 Formato:
 
-`Artista | URL o ID | canciones | collab`
+`Acto principal | URL o ID | canciones únicas atribuidas | collab`
 
 Ejemplo:
 
@@ -90,7 +94,7 @@ La API usa `videos.list` para obtener estadísticas.
 - Cada lote de hasta 50 IDs cuesta 1 unidad de cuota.
 - Hasta 50 IDs caben en una sola llamada.
 - La cuota estándar gratuita de YouTube Data API es de 10.000 unidades/día.
-- Con los 35 vídeos actuales, cada actualización programada usa 1 unidad.
+- Con los 36 vídeos actuales de Chapter 1, cada actualización programada usa 1 unidad.
 
 ## Seguridad y datos
 
