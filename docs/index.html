@@ -114,6 +114,8 @@
     .rowviews { min-width: 95px; text-align: right; font: 600 18px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
     .barwrap { grid-column: 2 / -1; height: 4px; background: #3a416e; border-radius: 99px; overflow: hidden; }
     .bar { height: 100%; width: 0; background: var(--gold); border-radius: inherit; transition: width 900ms ease; }
+    .top-share-track { height: 5px; margin-top: 10px; background: #3a416e; border-radius: 99px; overflow: hidden; }
+    .top-share-fill { height: 100%; background: var(--gold); border-radius: inherit; }
     .collabs { margin-top: 30px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
     .collabs h2 { margin: 0; color: var(--gold); font: italic 600 27px/1.1 "Cormorant Garamond", serif; }
     .collabs-intro { margin: 6px 0 14px; color: var(--muted); font-size: 11px; line-height: 1.5; }
@@ -237,6 +239,13 @@
     const share = totalViews > 0 ? (first.views / totalViews * 100) : 0;
     det.textContent = `${detail(first)} · ${share.toFixed(1)}% del total`;
 
+    const topShareTrack = document.createElement("div");
+    topShareTrack.className = "top-share-track";
+    const topShareFill = document.createElement("div");
+    topShareFill.className = "top-share-fill";
+    topShareFill.style.width = `${Math.max(0, Math.min(100, share))}%`;
+    topShareTrack.appendChild(topShareFill);
+
     const thumbs = document.createElement("div");
     thumbs.className = "thumbs";
     (first.video_list || []).forEach(v => thumbs.appendChild(thumb(v.id, true, v.title)));
@@ -247,7 +256,7 @@
       thumbs.appendChild(placeholder);
     }
 
-    top.append(topline, views, det, thumbs);
+    top.append(topline, views, det, topShareTrack, thumbs);
     app.appendChild(top);
 
     const rows = document.createElement("div");
