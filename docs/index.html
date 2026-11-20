@@ -41,6 +41,9 @@
       letter-spacing: -.025em;
     }
     h1 em { font-style: italic; }
+    .credit { display: inline-block; vertical-align: middle; margin-left: 5px; color: var(--muted); font: 400 9px/1.4 Inter, system-ui, sans-serif; letter-spacing: 0; }
+    .credit a { color: inherit; text-decoration: none; }
+    .credit a:hover { color: var(--white); text-decoration: underline; }
     .meta { margin: 14px 0 4px; color: var(--muted); font-size: 12px; letter-spacing: .02em; }
     .updated { color: var(--gold); font: 500 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
     .demo {
@@ -133,7 +136,7 @@
 <body>
 <main>
   <header>
-    <h1><em>MAMA 2026</em> <span style="font:500 .42em Inter,sans-serif;letter-spacing:0;color:var(--muted)">RANKING</span></h1>
+    <h1><em>MAMA 2026</em> <span style="font:500 .42em Inter,sans-serif;letter-spacing:0;color:var(--muted)">RANKING</span> <span class="credit">Sitio web creado por Luis Sequeira · Twitter: <a href="https://twitter.com/cryforasa" target="_blank" rel="noopener">@cryforasa</a></span></h1>
     <div id="meta" class="meta">Cargando datos…</div>
     <div id="updated" class="updated">—</div>
     <div id="demo" class="demo" hidden>Datos de ejemplo</div>
