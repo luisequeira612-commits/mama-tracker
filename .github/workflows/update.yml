@@ -1,0 +1,43 @@
+name: Update MAMA stats
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+  push:
+    branches: [main]
+    paths:
+      - "videos.txt"
+      - "config.json"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Update stats
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python scripts/update.py
+
+      - name: Commit changed stats
+        run: |
+          if git diff --quiet -- docs/stats.json; then
+            echo "No stats changes."
+            exit 0
+          fi
+          git config user.name "views-bot"
+          git config user.email "views-bot@users.noreply.github.com"
+          git add docs/stats.json
+          git commit -m "chore: update MAMA views"
+          git push

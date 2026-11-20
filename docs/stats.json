@@ -1,0 +1,94 @@
+{
+  "demo": true,
+  "event": "MAMA 2026",
+  "day": "Day 1",
+  "updated": null,
+  "updated_kst_text": "21 Nov at 03:23 KST",
+  "hours_since_start_text": "9h 23m after MAMA Day 1 began",
+  "total_views": 9736847,
+  "total_videos": 27,
+  "total_acts": 9,
+  "acts": [
+    {
+      "rank": 1,
+      "artist": "BABYMONSTER",
+      "views": 2587693,
+      "songs": 2,
+      "videos": 2,
+      "collabs": 1,
+      "video_list": []
+    },
+    {
+      "rank": 2,
+      "artist": "RESCENE",
+      "views": 1380517,
+      "songs": 2,
+      "videos": 3,
+      "collabs": 0,
+      "video_list": []
+    },
+    {
+      "rank": 3,
+      "artist": "ILLIT",
+      "views": 1289142,
+      "songs": 3,
+      "videos": 3,
+      "collabs": 0,
+      "video_list": []
+    },
+    {
+      "rank": 4,
+      "artist": "CL",
+      "views": 1037795,
+      "songs": 4,
+      "videos": 3,
+      "collabs": 1,
+      "video_list": []
+    },
+    {
+      "rank": 5,
+      "artist": "Hearts2Hearts",
+      "views": 1036470,
+      "songs": 2,
+      "videos": 3,
+      "collabs": 0,
+      "video_list": []
+    },
+    {
+      "rank": 6,
+      "artist": "ENHYPEN",
+      "views": 710868,
+      "songs": 4,
+      "videos": 4,
+      "collabs": 0,
+      "video_list": []
+    },
+    {
+      "rank": 7,
+      "artist": "LNGSHOT × MODYSSEY × TUIDE",
+      "views": 662439,
+      "songs": 5,
+      "videos": 3,
+      "collabs": 0,
+      "video_list": []
+    },
+    {
+      "rank": 8,
+      "artist": "Panic",
+      "views": 591528,
+      "songs": 2,
+      "videos": 3,
+      "collabs": 5,
+      "video_list": []
+    },
+    {
+      "rank": 9,
+      "artist": "TREASURE",
+      "views": 440395,
+      "songs": 3,
+      "videos": 3,
+      "collabs": 0,
+      "video_list": []
+    }
+  ]
+}

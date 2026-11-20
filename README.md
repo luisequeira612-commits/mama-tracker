@@ -57,11 +57,11 @@ Edita `videos.txt`.
 
 Formato:
 
-`Artista | URL o ID del video | canciones | collab`
+`Artista | URL o ID | canciones | collab`
 
 Ejemplo:
 
-`ARTISTA | https://www.youtube.com/watch?v=XXXXXXXXXXX | 2 | collab`
+`ARTISTA | https://www.youtube.com/watch?v=XXXXXXXXXXX | 1 | collab`
 
 Las líneas que empiezan por `#` son comentarios y no se procesan.
 
