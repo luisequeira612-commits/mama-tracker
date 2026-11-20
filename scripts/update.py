@@ -167,6 +167,7 @@ def build_stats(entries, found, config):
             "songs": 0,
             "videos": 0,
             "collabs": 0,
+            "collab_views": 0,
             "video_list": [],
         })
 
@@ -175,6 +176,8 @@ def build_stats(entries, found, config):
         group["songs"] += entry["songs"]
         group["videos"] += 1
         group["collabs"] += int(entry["collab"])
+        if entry["collab"]:
+            group["collab_views"] += video["views"]
         group["video_list"].append({
             "id": video["id"],
             "title": video["title"],
@@ -199,6 +202,7 @@ def build_stats(entries, found, config):
         "updated_kst_text": updated_kst_text,
         "hours_since_start_text": elapsed_text(config["day1_start_kst"]),
         "total_views": sum(act["views"] for act in acts),
+        "total_collaboration_views": sum(act["collab_views"] for act in acts),
         "total_videos": len(entries),
         "total_acts": len(acts),
         "acts": acts,

@@ -5,10 +5,11 @@ Tracker personal de reproducciones en YouTube para MAMA 2026 — Day 1.
 ## Qué hace
 
 - Agrupa vídeos por acto principal ignorando mayúsculas/minúsculas y espacios extra.
-- Suma las vistas actuales de todos los videos configurados.
+- Suma las vistas actuales de todos los vídeos configurados y muestra el porcentaje de cada acto sobre el total.
 - Cuenta canciones únicas atribuidas, vídeos y colaboraciones.
-- Cada vídeo se cuenta una sola vez; los cortes de canciones ya contabilizadas usan `songs=0` para evitar duplicar el contador de canciones.
+- Cada vídeo se cuenta una sola vez en el total general; los cortes de canciones ya contabilizadas usan `songs=0` para evitar duplicar el contador de canciones.
 - Las colaboraciones se atribuyen a un acto principal para evitar filas duplicadas; se marcan con `collab`.
+- Muestra aparte las vistas y el porcentaje de los vídeos colaborativos, también atribuidos una sola vez al acto principal. Esta sección no vuelve a sumarse al ranking general.
 - Ordena los actos por vistas y destaca el #1.
 - Actualiza `docs/stats.json` cada 30 minutos mediante GitHub Actions.
 - La página refresca los datos cada 5 minutos.
@@ -112,6 +113,7 @@ La interfaz incluye datos de ejemplo para que la página no aparezca vacía ante
 videos.txt
 config.json
 scripts/update.py
+tests/test_update.py
 docs/index.html
 docs/stats.json
 .github/workflows/update.yml
