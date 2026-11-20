@@ -5,6 +5,7 @@
 # BABYMONSTER incluye su actuación y el vídeo conjunto con Street World Fighter.
 # Street World Fighter tiene además su vídeo independiente DOCKING COMPLETE.
 # Los vídeos completos contabilizan cada canción una sola vez; sus cortes usan songs=0.
+# songs cuenta canciones propias del acto; los vídeos colaborativos se cuentan en collabs y no inflan songs.
 
 BABYMONSTER | iIaw6HvS09Y | 2
 BABYMONSTER | 3JvKNtTN3jk | 0 | collab
@@ -19,8 +20,8 @@ INI | 7x1ANdAOjIY | 2
 ILLIT | a7xzBj-vYQ8 | 3
 NCT WISH | f5zeVTLO9sA | 2
 TREASURE | 3D8IjUemw1c | 3
-CL | bLzWombcRLU | 0
-CL | 4Y_tDLBs8Pw | 0 | collab
+CL | bLzWombcRLU | 2
+CL | 4Y_tDLBs8Pw | 2
 ALLDAY PROJECT | _a3wgovmNc8 | 1
 PANIC | FELp5S31uJU | 1 | collab
 PANIC | BEOkuAZwfXg | 1 | collab
@@ -28,7 +29,7 @@ PANIC | fyBnlSRxySg | 0 | collab
 LNGSHOT X MODYSSEY X TUIDE | 2UitQkvkNqI | 1 | collab
 LNGSHOT X MODYSSEY X TUIDE | zWcqximR6T0 | 1 | collab
 LNGSHOT X MODYSSEY X TUIDE | 0lJNbLrUecg | 4 | collab
-CL | _Kfx4L0p3SI | 5 | collab
+CL | _Kfx4L0p3SI | 0 | collab
 ENHYPEN | n9iu72mjil0 | 4
 
 # Cortes individuales oficiales de Mnet K-POP (@Mnet).
