@@ -3,20 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0a0f2a">
-  <title>MAMA 2026 stage chart</title>
+  <meta name="theme-color" content="#160d19">
+  <title>MAMA 2026 · Ranking de actuaciones</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0f2a;
-      --bg2: #131a44;
-      --gold: #e2b95b;
-      --white: #eef0fb;
-      --muted: #8d93b8;
-      --line: #252d5c;
-      --card: rgba(24, 31, 73, .78);
+      --bg: #160d19;
+      --bg2: #2b1429;
+      --gold: #ff5b91;
+      --white: #fff3f8;
+      --muted: #c3a8bb;
+      --line: #4a2944;
+      --card: rgba(43, 22, 43, .82);
+      --accent-soft: #c78bff;
     }
     * { box-sizing: border-box; }
     html { background: var(--bg); }
@@ -25,18 +26,18 @@
       min-height: 100vh;
       color: var(--white);
       background:
-        radial-gradient(circle at 18% 8%, rgba(226,185,91,.07) 0 1px, transparent 2px),
-        radial-gradient(circle at 72% 24%, rgba(238,240,251,.06) 0 1px, transparent 2px),
-        radial-gradient(circle at 38% 58%, rgba(238,240,251,.05) 0 1px, transparent 2px),
-        linear-gradient(145deg, var(--bg), var(--bg2));
+        radial-gradient(circle at 18% 8%, rgba(255,91,145,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 72% 24%, rgba(199,139,255,.08) 0 1px, transparent 2px),
+        radial-gradient(circle at 38% 58%, rgba(255,243,248,.05) 0 1px, transparent 2px),
+        radial-gradient(ellipse at 85% 0%, rgba(199,139,255,.12), transparent 42%), linear-gradient(145deg, var(--bg), var(--bg2));
       background-size: 137px 151px, 191px 173px, 223px 199px, auto;
       font-family: Inter, system-ui, sans-serif;
     }
-    main { width: min(760px, calc(100% - 36px)); margin: 0 auto; padding: 42px 0 64px; }
+    main { width: min(760px, calc(100% - 32px)); margin: 0 auto; padding: 34px 0 56px; }
     header { text-align: left; }
     h1 {
       margin: 0;
-      font: 600 clamp(48px, 13vw, 64px)/.88 "Cormorant Garamond", serif;
+      font: 600 clamp(40px, 10vw, 54px)/.92 "Cormorant Garamond", serif;
       letter-spacing: -.025em;
     }
     h1 em { font-style: italic; }
@@ -61,33 +62,27 @@
       font-size: 14px;
     }
     .top {
-      border: 1px solid var(--gold);
+      border: 1px solid rgba(255,91,145,.55);
       border-radius: 14px;
-      padding: 22px;
+      padding: 16px 18px;
       background: var(--card);
       box-shadow: 0 18px 50px rgba(0,0,0,.16);
     }
-    .topline { display: flex; align-items: flex-start; gap: 14px; }
-    .no { font: 600 clamp(64px, 17vw, 82px)/.8 "Cormorant Garamond", serif; white-space: nowrap; }
-    .artist {
-      margin-left: auto;
-      color: var(--gold);
-      font: italic 700 clamp(42px, 11vw, 62px)/.82 "Cormorant Garamond", serif;
-      text-align: right;
-      overflow-wrap: anywhere;
-    }
+    .topline { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .no { flex: 0 0 auto; padding: 6px 9px; border-radius: 8px; color: #fff; background: var(--gold); font: 700 13px/1 Inter, sans-serif; white-space: nowrap; }
+    .artist { min-width: 0; flex: 1; margin: 0; color: var(--gold); font: italic 700 clamp(23px, 6vw, 34px)/1.05 "Cormorant Garamond", serif; text-align: left; overflow-wrap: anywhere; }
     .views {
-      margin-top: 18px;
-      font: 600 clamp(44px, 11vw, 64px)/1 "Cormorant Garamond", serif;
+      margin-top: 12px;
+      font: 600 clamp(32px, 8vw, 42px)/1 "Cormorant Garamond", serif;
       letter-spacing: -.02em;
     }
     .views span { color: var(--muted); font: 500 16px Inter, sans-serif; letter-spacing: 0; }
     .detail { margin-top: 7px; color: var(--muted); font-size: 13px; }
-    .thumbs { display: flex; gap: 12px; margin-top: 18px; overflow-x: auto; scrollbar-width: thin; }
+    .thumbs { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; scrollbar-width: thin; }
     .thumb {
       display: block;
-      flex: 1 0 calc((100% - 12px) / 2);
-      min-width: 220px;
+      flex: 0 0 calc((100% - 8px) / 2);
+      min-width: 0;
       aspect-ratio: 16/9;
       border-radius: 8px;
       overflow: hidden;
@@ -102,13 +97,13 @@
       grid-template-columns: 46px minmax(0, 1fr) auto;
       gap: 10px;
       align-items: center;
-      min-height: 96px;
-      padding: 16px 0;
+      min-height: 78px;
+      padding: 12px 0;
       border-top: 1px solid var(--line);
     }
     .rank { font: 600 25px "Cormorant Garamond", serif; color: var(--muted); }
     .rowname { min-width: 0; }
-    .rowartist { font: italic 600 25px/1 "Cormorant Garamond", serif; overflow-wrap: anywhere; }
+    .rowartist { font: italic 600 22px/1.05 "Cormorant Garamond", serif; overflow-wrap: anywhere; }
     .rowdetail { color: var(--muted); font-size: 12px; margin-top: 6px; }
     .right { display: flex; align-items: center; gap: 10px; }
     .mini-thumbs { display: flex; gap: 5px; max-width: 150px; overflow: hidden; }
@@ -119,8 +114,11 @@
     .focus:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
     .footer { margin-top: 28px; color: var(--muted); font-size: 11px; text-align: center; }
     @media (max-width: 600px) {
-      main { width: min(760px, calc(100% - 36px)); padding-top: 34px; }
-      .top { padding: 18px; }
+      main { width: min(760px, calc(100% - 28px)); padding-top: 28px; }
+      .top { padding: 14px; }
+      .topline { gap: 9px; }
+      .artist { font-size: clamp(22px, 6.2vw, 29px); }
+      .views { font-size: clamp(30px, 8vw, 38px); }
       .row { grid-template-columns: 38px minmax(0, 1fr); }
       .right { grid-column: 2; justify-content: space-between; }
       .mini-thumbs { display: none; }
@@ -135,7 +133,7 @@
 <body>
 <main>
   <header>
-    <h1><em>MAMA 2026</em> stage chart</h1>
+    <h1><em>MAMA 2026</em> <span style="font:500 .42em Inter,sans-serif;letter-spacing:0;color:var(--muted)">RANKING</span></h1>
     <div id="meta" class="meta">Cargando datos…</div>
     <div id="updated" class="updated">—</div>
     <div id="demo" class="demo" hidden>Datos de ejemplo</div>
@@ -152,10 +150,10 @@
   const nf = new Intl.NumberFormat("en-US");
 
   function detail(act) {
-    const songs = act.songs === 1 ? "song" : "songs";
-    const videos = act.videos === 1 ? "video" : "videos";
+    const songs = act.songs === 1 ? "canción" : "canciones";
+    const videos = act.videos === 1 ? "vídeo" : "vídeos";
     let text = `${act.songs} ${songs} · ${act.videos} ${videos}`;
-    if (act.collabs > 0) text += ` · ${act.collabs} ${act.collabs === 1 ? "collab" : "collabs"}`;
+    if (act.collabs > 0) text += ` · ${act.collabs} ${act.collabs === 1 ? "colaboración" : "colaboraciones"}`;
     return text;
   }
 
@@ -195,8 +193,8 @@
       throw new Error("stats.json no contiene actos válidos.");
     }
 
-    meta.textContent = `${data.total_acts} acts · ${data.total_videos} videos · ${nf.format(data.total_views)} views · ${data.day}`;
-    updated.textContent = data.updated_kst_text ? `${data.updated_kst_text} · ${data.hours_since_start_text || ""}` : "Datos aún no actualizados";
+    meta.textContent = `${data.total_acts} artistas · ${data.total_videos} vídeos · ${nf.format(data.total_views)} reproducciones · ${data.day}`;
+    updated.textContent = data.updated_kst_text ? `Actualizado: ${data.updated_kst_text} · ${data.hours_since_start_text || ""}` : "Datos aún no actualizados";
     demo.hidden = !data.demo;
     app.innerHTML = "";
 
@@ -208,7 +206,7 @@
 
     const no = document.createElement("div");
     no.className = "no";
-    no.textContent = "No. 1";
+    no.textContent = "N.º 1";
 
     const artist = document.createElement("div");
     artist.className = "artist";
@@ -218,7 +216,7 @@
 
     const views = document.createElement("div");
     views.className = "views";
-    views.innerHTML = `${nf.format(first.views)} <span>views</span>`;
+    views.innerHTML = `${nf.format(first.views)} <span>reproducciones</span>`;
 
     const det = document.createElement("div");
     det.className = "detail";
