@@ -174,6 +174,20 @@
     return text;
   }
 
+  // Largest-remainder allocation: rounded labels always add up to exactly 100.0%.
+  function allocatePercentageTenths(values, total) {
+    if (!(total > 0)) return values.map(() => 0);
+    const raw = values.map(value => Math.max(0, Number(value) || 0) * 1000 / total);
+    const allocated = raw.map(Math.floor);
+    let remaining = 1000 - allocated.reduce((sum, value) => sum + value, 0);
+    const order = raw.map((value, index) => ({
+      index,
+      remainder: value - allocated[index]
+    })).sort((a, b) => b.remainder - a.remainder || a.index - b.index);
+    for (let i = 0; i < remaining; i++) allocated[order[i].index] += 1;
+    return allocated;
+  }
+
   function thumbUrl(id, size) {
     return `https://i.ytimg.com/vi/${encodeURIComponent(id)}/${size}.jpg`;
   }
@@ -238,14 +252,16 @@
     const det = document.createElement("div");
     det.className = "detail";
     const totalViews = Number(data.total_views) || data.acts.reduce((sum, act) => sum + (Number(act.views) || 0), 0);
-    const share = totalViews > 0 ? (first.views / totalViews * 100) : 0;
-    det.textContent = `${detail(first)} · ${share.toFixed(1)}% del total`;
+    const displayedShares = allocatePercentageTenths(data.acts.map(act => act.views), totalViews);
+    const firstShare = displayedShares[0] / 10;
+    const firstRawShare = totalViews > 0 ? (first.views / totalViews * 100) : 0;
+    det.textContent = `${detail(first)} · ${firstShare.toFixed(1)}% del total`;
 
     const topShareTrack = document.createElement("div");
     topShareTrack.className = "top-share-track";
     const topShareFill = document.createElement("div");
     topShareFill.className = "top-share-fill";
-    topShareFill.style.width = `${Math.max(0, Math.min(100, share))}%`;
+    topShareFill.style.width = `${Math.max(0, Math.min(100, firstRawShare))}%`;
     topShareTrack.appendChild(topShareFill);
 
     const thumbs = document.createElement("div");
@@ -280,7 +296,8 @@
       const rowdetail = document.createElement("div");
       rowdetail.className = "rowdetail";
       const actShare = totalViews > 0 ? (act.views / totalViews * 100) : 0;
-      rowdetail.textContent = `${detail(act)} · ${actShare.toFixed(1)}% del total`;
+      const displayedShare = displayedShares[data.acts.indexOf(act)] / 10;
+      rowdetail.textContent = `${detail(act)} · ${displayedShare.toFixed(1)}% del total`;
       name.append(rowartist, rowdetail);
 
       const right = document.createElement("div");
@@ -314,6 +331,11 @@
         .map(video => ({ ...video, primaryArtist: act.artist })))
       .sort((a, b) => b.views - a.views);
 
+    const collaborationShares = allocatePercentageTenths(
+      collaborationVideos.map(video => video.views),
+      collaborationTotal
+    );
+
     if (collaborationVideos.length > 0 && collaborationTotal > 0) {
       const section = document.createElement("section");
       section.className = "collabs";
@@ -324,7 +346,7 @@
       intro.textContent = `Distribución de ${nf.format(collaborationTotal)} reproducciones entre vídeos colaborativos. Cada vídeo aparece una sola vez, aunque participen varios actos; el título muestra la colaboración completa. No se vuelve a sumar al ranking general.`;
       section.append(heading, intro);
 
-      collaborationVideos.forEach(video => {
+      collaborationVideos.forEach((video, index) => {
         const row = document.createElement("div");
         row.className = "collab-row";
         const meta = document.createElement("div");
@@ -332,7 +354,7 @@
         const artistName = document.createElement("strong");
         artistName.textContent = video.primaryArtist;
         const percentage = document.createElement("strong");
-        percentage.textContent = `${(video.views / collaborationTotal * 100).toFixed(1)}%`;
+        percentage.textContent = `${(collaborationShares[index] / 10).toFixed(1)}%`;
         meta.append(artistName, percentage);
         const title = document.createElement("a");
         title.className = "collab-title";
