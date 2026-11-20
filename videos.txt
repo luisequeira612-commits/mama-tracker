@@ -4,14 +4,14 @@
 # Las colaboraciones se atribuyen una sola vez al acto principal para evitar duplicar vídeos.
 # BABYMONSTER incluye su actuación y el vídeo conjunto con Street World Fighter.
 # Street World Fighter tiene además su vídeo independiente DOCKING COMPLETE.
-# Los vídeos recopilatorios/cortes no deben duplicar canciones ya contabilizadas.
+# Los vídeos completos contabilizan cada canción una sola vez; sus cortes usan songs=0.
 
 BABYMONSTER | iIaw6HvS09Y | 2
 BABYMONSTER | 3JvKNtTN3jk | 0 | collab
 STREET WORLD FIGHTER | 7IzRrfKEfpw | 1
-ENHYPEN | rBbQ32y7Xm0 | 1
-ENHYPEN | glURXZmyTI8 | 2
-ENHYPEN | mYuGfSa1E6A | 1
+ENHYPEN | rBbQ32y7Xm0 | 0
+ENHYPEN | glURXZmyTI8 | 0
+ENHYPEN | mYuGfSa1E6A | 0
 RESCENE | XW0jCabK8vU | 2
 ALPHA DRIVE ONE | TKwLRxhesnQ | 3
 Hearts2Hearts | 9KPXhIiRn2U | 2
@@ -19,8 +19,8 @@ INI | 7x1ANdAOjIY | 2
 ILLIT | a7xzBj-vYQ8 | 3
 NCT WISH | f5zeVTLO9sA | 2
 TREASURE | 3D8IjUemw1c | 3
-CL | bLzWombcRLU | 2
-CL | 4Y_tDLBs8Pw | 2 | collab
+CL | bLzWombcRLU | 0
+CL | 4Y_tDLBs8Pw | 0 | collab
 ALLDAY PROJECT | _a3wgovmNc8 | 1
 PANIC | FELp5S31uJU | 1 | collab
 PANIC | BEOkuAZwfXg | 1 | collab
