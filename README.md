@@ -113,6 +113,7 @@ La interfaz incluye datos de ejemplo para que la página no aparezca vacía ante
 videos.txt
 config.json
 scripts/update.py
+tests/test_update.py
 docs/index.html
 docs/stats.json
 .github/workflows/update.yml
