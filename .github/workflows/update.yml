@@ -25,6 +25,9 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Test statistics
+        run: python -m unittest discover -s tests -v
+
       - name: Update stats
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
