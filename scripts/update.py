@@ -156,6 +156,27 @@ def elapsed_text(start_iso):
     return f"{hours}h {minutes}m after MAMA Day 1 began"
 
 
+def percentage_tenths(values, total):
+    """Allocate one-decimal percentage units with largest remainders.
+
+    The returned integers are tenths of a percent and always sum to 1000
+    when total is positive, avoiding visible rounding drift.
+    """
+    if total <= 0:
+        return [0 for _ in values]
+
+    raw = [max(0, int(value)) * 1000 / total for value in values]
+    allocated = [int(value) for value in raw]
+    remaining = 1000 - sum(allocated)
+    order = sorted(
+        range(len(values)),
+        key=lambda index: (-(raw[index] - allocated[index]), index),
+    )
+    for index in order[:remaining]:
+        allocated[index] += 1
+    return allocated
+
+
 def build_stats(entries, found, config):
     groups = {}
 
@@ -190,6 +211,12 @@ def build_stats(entries, found, config):
     for rank, act in enumerate(acts, 1):
         act["rank"] = rank
 
+    total_views = sum(act["views"] for act in acts)
+    for act, share_tenths in zip(acts, percentage_tenths(
+        [act["views"] for act in acts], total_views
+    )):
+        act["share_tenths"] = share_tenths
+
     now = datetime.now(timezone.utc)
     kst = now.astimezone(__import__("datetime").timezone(__import__("datetime").timedelta(hours=9)))
     updated_kst_text = kst.strftime("%-d %b at %H:%M KST")
@@ -201,7 +228,7 @@ def build_stats(entries, found, config):
         "updated": now.isoformat().replace("+00:00", "Z"),
         "updated_kst_text": updated_kst_text,
         "hours_since_start_text": elapsed_text(config["day1_start_kst"]),
-        "total_views": sum(act["views"] for act in acts),
+        "total_views": total_views,
         "total_collaboration_views": sum(act["collab_views"] for act in acts),
         "total_videos": len(entries),
         "total_acts": len(acts),
