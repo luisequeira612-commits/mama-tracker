@@ -1,6 +1,5 @@
 # MAMA 2026 — Day 1
 # Formato: Artista | URL o ID | canciones | collab
 # Solo IDs confirmados. No inventar IDs.
-#
-# Ejemplo:
-# BABYMONSTER | https://www.youtube.com/watch?v=XXXXXXXXXXX | 1
+
+BABYMONSTER | iIaw6HvS09Y | 2
