@@ -29,7 +29,8 @@
           "collab": true
         }
       ],
-      "rank": 1
+      "rank": 1,
+      "collab_views": 1766268
     },
     {
       "artist": "ILLIT",
@@ -57,7 +58,8 @@
           "collab": false
         }
       ],
-      "rank": 2
+      "rank": 2,
+      "collab_views": 0
     },
     {
       "artist": "RESCENE",
@@ -85,7 +87,8 @@
           "collab": false
         }
       ],
-      "rank": 3
+      "rank": 3,
+      "collab_views": 0
     },
     {
       "artist": "CL",
@@ -113,7 +116,8 @@
           "collab": true
         }
       ],
-      "rank": 4
+      "rank": 4,
+      "collab_views": 585287
     },
     {
       "artist": "Hearts2Hearts",
@@ -141,7 +145,8 @@
           "collab": false
         }
       ],
-      "rank": 5
+      "rank": 5,
+      "collab_views": 0
     },
     {
       "artist": "ENHYPEN",
@@ -175,7 +180,8 @@
           "collab": false
         }
       ],
-      "rank": 6
+      "rank": 6,
+      "collab_views": 0
     },
     {
       "artist": "LNGSHOT X MODYSSEY X TUIDE",
@@ -203,7 +209,8 @@
           "collab": true
         }
       ],
-      "rank": 7
+      "rank": 7,
+      "collab_views": 870796
     },
     {
       "artist": "PANIC",
@@ -231,7 +238,8 @@
           "collab": true
         }
       ],
-      "rank": 8
+      "rank": 8,
+      "collab_views": 801314
     },
     {
       "artist": "TREASURE",
@@ -259,7 +267,8 @@
           "collab": false
         }
       ],
-      "rank": 9
+      "rank": 9,
+      "collab_views": 0
     },
     {
       "artist": "ALLDAY PROJECT",
@@ -275,7 +284,8 @@
           "collab": false
         }
       ],
-      "rank": 10
+      "rank": 10,
+      "collab_views": 0
     },
     {
       "artist": "NCT WISH",
@@ -303,7 +313,8 @@
           "collab": false
         }
       ],
-      "rank": 11
+      "rank": 11,
+      "collab_views": 0
     },
     {
       "artist": "ALPHA DRIVE ONE",
@@ -331,7 +342,8 @@
           "collab": false
         }
       ],
-      "rank": 12
+      "rank": 12,
+      "collab_views": 0
     },
     {
       "artist": "INI",
@@ -347,7 +359,8 @@
           "collab": false
         }
       ],
-      "rank": 13
+      "rank": 13,
+      "collab_views": 0
     },
     {
       "artist": "STREET WORLD FIGHTER",
@@ -363,7 +376,9 @@
           "collab": false
         }
       ],
-      "rank": 14
+      "rank": 14,
+      "collab_views": 0
     }
-  ]
+  ],
+  "total_collaboration_views": 4023665
 }
