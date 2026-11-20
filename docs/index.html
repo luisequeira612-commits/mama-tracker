@@ -114,6 +114,16 @@
     .rowviews { min-width: 95px; text-align: right; font: 600 18px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
     .barwrap { grid-column: 2 / -1; height: 4px; background: #3a416e; border-radius: 99px; overflow: hidden; }
     .bar { height: 100%; width: 0; background: var(--gold); border-radius: inherit; transition: width 900ms ease; }
+    .collabs { margin-top: 30px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+    .collabs h2 { margin: 0; color: var(--gold); font: italic 600 27px/1.1 "Cormorant Garamond", serif; }
+    .collabs-intro { margin: 6px 0 14px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .collab-row { padding: 11px 0; border-top: 1px solid var(--line); }
+    .collab-row:first-of-type { border-top: 0; }
+    .collab-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+    .collab-meta strong:last-child { color: var(--gold); white-space: nowrap; }
+    .collab-views { margin-top: 4px; color: var(--muted); font-size: 11px; }
+    .collab-barwrap { height: 4px; margin-top: 8px; background: #3a416e; border-radius: 99px; overflow: hidden; }
+    .collab-bar { height: 100%; background: var(--accent-soft); border-radius: inherit; }
     .focus:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
     .footer { margin-top: 28px; color: var(--muted); font-size: 11px; text-align: center; }
     @media (max-width: 600px) {
@@ -223,7 +233,9 @@
 
     const det = document.createElement("div");
     det.className = "detail";
-    det.textContent = detail(first);
+    const totalViews = Number(data.total_views) || data.acts.reduce((sum, act) => sum + (Number(act.views) || 0), 0);
+    const share = totalViews > 0 ? (first.views / totalViews * 100) : 0;
+    det.textContent = `${detail(first)} · ${share.toFixed(1)}% del total`;
 
     const thumbs = document.createElement("div");
     thumbs.className = "thumbs";
@@ -256,7 +268,8 @@
       rowartist.textContent = act.artist;
       const rowdetail = document.createElement("div");
       rowdetail.className = "rowdetail";
-      rowdetail.textContent = detail(act);
+      const actShare = totalViews > 0 ? (act.views / totalViews * 100) : 0;
+      rowdetail.textContent = `${detail(act)} · ${actShare.toFixed(1)}% del total`;
       name.append(rowartist, rowdetail);
 
       const right = document.createElement("div");
@@ -273,7 +286,7 @@
       barwrap.className = "barwrap";
       const bar = document.createElement("div");
       bar.className = "bar";
-      bar.style.width = `${Math.max(0, Math.min(100, (act.views / first.views) * 100))}%`;
+      bar.style.width = `${Math.max(0, Math.min(100, actShare))}%`;
       barwrap.appendChild(bar);
 
       row.append(rank, name, right, barwrap);
@@ -281,6 +294,47 @@
     });
 
     app.appendChild(rows);
+
+    const collaborationTotal = Number(data.total_collaboration_views) ||
+      data.acts.reduce((sum, act) => sum + (Number(act.collab_views) || 0), 0);
+    const collaborationActs = data.acts
+      .filter(act => Number(act.collab_views) > 0)
+      .sort((a, b) => b.collab_views - a.collab_views);
+
+    if (collaborationActs.length > 0 && collaborationTotal > 0) {
+      const section = document.createElement("section");
+      section.className = "collabs";
+      const heading = document.createElement("h2");
+      heading.textContent = "Vistas de colaboraciones";
+      const intro = document.createElement("p");
+      intro.className = "collabs-intro";
+      intro.textContent = `Distribución de ${nf.format(collaborationTotal)} reproducciones en vídeos colaborativos. Cada vídeo se atribuye una sola vez al acto principal; este apartado no se suma de nuevo al ranking general.`;
+      section.append(heading, intro);
+
+      collaborationActs.forEach(act => {
+        const row = document.createElement("div");
+        row.className = "collab-row";
+        const meta = document.createElement("div");
+        meta.className = "collab-meta";
+        const artistName = document.createElement("strong");
+        artistName.textContent = act.artist;
+        const percentage = document.createElement("strong");
+        percentage.textContent = `${(act.collab_views / collaborationTotal * 100).toFixed(1)}%`;
+        meta.append(artistName, percentage);
+        const count = document.createElement("div");
+        count.className = "collab-views";
+        count.textContent = `${nf.format(act.collab_views)} reproducciones · ${act.collabs} ${act.collabs === 1 ? "vídeo colaborativo" : "vídeos colaborativos"}`;
+        const track = document.createElement("div");
+        track.className = "collab-barwrap";
+        const fill = document.createElement("div");
+        fill.className = "collab-bar";
+        fill.style.width = `${Math.max(0, Math.min(100, act.collab_views / collaborationTotal * 100))}%`;
+        track.appendChild(fill);
+        row.append(meta, count, track);
+        section.appendChild(row);
+      });
+      app.appendChild(section);
+    }
   }
 
   async function load() {
