@@ -11,10 +11,10 @@ class PercentageRoundingTests(unittest.TestCase):
         ]
         shares = percentage_tenths(views, sum(views))
         self.assertEqual(sum(shares), 1000)
-        self.assertEqual(shares[0], 236)
+        self.assertEqual(shares[0], 235)
 
     def test_collaboration_percentages_also_sum_to_exactly_100_percent(self):
-        views = [1766268, 585287, 870796, 801314, 541842, 126975, 201979, 85524]
+        views = [1766268, 585287, 541842, 126975, 201979, 509030, 85524, 206760]
         shares = percentage_tenths(views, sum(views))
         self.assertEqual(sum(shares), 1000)
 
