@@ -1,5 +1,25 @@
 import unittest
-from scripts.update import build_stats
+from scripts.update import build_stats, percentage_tenths
+
+
+
+class PercentageRoundingTests(unittest.TestCase):
+    def test_rounded_act_percentages_sum_to_exactly_100_percent(self):
+        views = [
+            3276144, 1727374, 1679461, 1539092, 1282683, 1175802,
+            870796, 801314, 560389, 336703, 306134, 217357, 85684, 49987,
+        ]
+        shares = percentage_tenths(views, sum(views))
+        self.assertEqual(sum(shares), 1000)
+        self.assertEqual(shares[0], 236)
+
+    def test_collaboration_percentages_also_sum_to_exactly_100_percent(self):
+        views = [1766268, 585287, 870796, 801314, 541842, 126975, 201979, 85524]
+        shares = percentage_tenths(views, sum(views))
+        self.assertEqual(sum(shares), 1000)
+
+    def test_zero_total_returns_zero_shares(self):
+        self.assertEqual(percentage_tenths([10, 20], 0), [0, 0])
 
 
 class CollaborationViewTests(unittest.TestCase):
