@@ -123,6 +123,8 @@
     .collab-row:first-of-type { border-top: 0; }
     .collab-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
     .collab-meta strong:last-child { color: var(--gold); white-space: nowrap; }
+    .collab-title { display: block; margin-top: 5px; color: var(--white); font-size: 11px; line-height: 1.45; text-decoration: none; overflow-wrap: anywhere; }
+    .collab-title:hover { text-decoration: underline; }
     .collab-views { margin-top: 4px; color: var(--muted); font-size: 11px; }
     .collab-barwrap { height: 4px; margin-top: 8px; background: #3a416e; border-radius: 99px; overflow: hidden; }
     .collab-bar { height: 100%; background: var(--accent-soft); border-radius: inherit; }
@@ -306,40 +308,48 @@
 
     const collaborationTotal = Number(data.total_collaboration_views) ||
       data.acts.reduce((sum, act) => sum + (Number(act.collab_views) || 0), 0);
-    const collaborationActs = data.acts
-      .filter(act => Number(act.collab_views) > 0)
-      .sort((a, b) => b.collab_views - a.collab_views);
+    const collaborationVideos = data.acts
+      .flatMap(act => (act.video_list || [])
+        .filter(video => video.collab)
+        .map(video => ({ ...video, primaryArtist: act.artist })))
+      .sort((a, b) => b.views - a.views);
 
-    if (collaborationActs.length > 0 && collaborationTotal > 0) {
+    if (collaborationVideos.length > 0 && collaborationTotal > 0) {
       const section = document.createElement("section");
       section.className = "collabs";
       const heading = document.createElement("h2");
       heading.textContent = "Vistas de colaboraciones";
       const intro = document.createElement("p");
       intro.className = "collabs-intro";
-      intro.textContent = `Distribución de ${nf.format(collaborationTotal)} reproducciones en vídeos colaborativos. Cada vídeo se atribuye una sola vez al acto principal; este apartado no se suma de nuevo al ranking general.`;
+      intro.textContent = `Distribución de ${nf.format(collaborationTotal)} reproducciones entre vídeos colaborativos. Cada vídeo aparece una sola vez, aunque participen varios actos; el título muestra la colaboración completa. No se vuelve a sumar al ranking general.`;
       section.append(heading, intro);
 
-      collaborationActs.forEach(act => {
+      collaborationVideos.forEach(video => {
         const row = document.createElement("div");
         row.className = "collab-row";
         const meta = document.createElement("div");
         meta.className = "collab-meta";
         const artistName = document.createElement("strong");
-        artistName.textContent = act.artist;
+        artistName.textContent = video.primaryArtist;
         const percentage = document.createElement("strong");
-        percentage.textContent = `${(act.collab_views / collaborationTotal * 100).toFixed(1)}%`;
+        percentage.textContent = `${(video.views / collaborationTotal * 100).toFixed(1)}%`;
         meta.append(artistName, percentage);
+        const title = document.createElement("a");
+        title.className = "collab-title";
+        title.href = `https://www.youtube.com/watch?v=${encodeURIComponent(video.id)}`;
+        title.target = "_blank";
+        title.rel = "noopener";
+        title.textContent = video.title || "Abrir vídeo colaborativo en YouTube";
         const count = document.createElement("div");
         count.className = "collab-views";
-        count.textContent = `${nf.format(act.collab_views)} reproducciones · ${act.collabs} ${act.collabs === 1 ? "vídeo colaborativo" : "vídeos colaborativos"}`;
+        count.textContent = `${nf.format(video.views)} reproducciones`;
         const track = document.createElement("div");
         track.className = "collab-barwrap";
         const fill = document.createElement("div");
         fill.className = "collab-bar";
-        fill.style.width = `${Math.max(0, Math.min(100, act.collab_views / collaborationTotal * 100))}%`;
+        fill.style.width = `${Math.max(0, Math.min(100, video.views / collaborationTotal * 100))}%`;
         track.appendChild(fill);
-        row.append(meta, count, track);
+        row.append(meta, title, count, track);
         section.appendChild(row);
       });
       app.appendChild(section);
