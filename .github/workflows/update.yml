@@ -2,9 +2,6 @@ name: Update MAMA stats
 
 on:
   workflow_dispatch:
-  schedule:
-    # Keep scheduled runs away from the busiest minute (:00 and :30).
-    - cron: "13,43 * * * *"
   push:
     branches: [main]
     paths:

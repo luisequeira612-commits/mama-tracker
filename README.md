@@ -11,9 +11,9 @@ Tracker personal de reproducciones en YouTube para MAMA 2026 — Day 1.
 - Las colaboraciones se atribuyen a un acto principal para evitar filas duplicadas; se marcan con `collab`.
 - Muestra aparte las vistas y el porcentaje de los vídeos colaborativos, también atribuidos una sola vez al acto principal. Sus porcentajes visibles también suman exactamente 100.0%, y esta sección no vuelve a sumarse al ranking general.
 - Ordena los actos por vistas y destaca el #1.
-- Actualiza `docs/stats.json` cada 30 minutos mediante GitHub Actions.
+- Actualiza `docs/stats.json` cada 30 minutos iniciando GitHub Actions desde un Cloudflare Worker Cron Trigger.
 - La página refresca los datos cada 5 minutos.
-- Usa GitHub Pages + GitHub Actions + YouTube Data API v3, sin servidor ni base de datos.
+- Usa GitHub Pages + GitHub Actions + YouTube Data API v3 + Cloudflare Worker como disparador, sin servidor propio ni base de datos.
 
 ## Configuración inicial
 
@@ -86,7 +86,9 @@ Ve a:
 
 **Actions → Update MAMA stats → Run workflow**
 
-El workflow también se ejecuta automáticamente cada 30 minutos y cuando cambian `videos.txt` o `config.json`.
+El Worker de Cloudflare inicia este mismo workflow cada 30 minutos. Los cambios en `videos.txt` o `config.json` también lo ejecutan automáticamente.
+
+La configuración del Worker y los pasos para desplegarlo están en [docs/CLOUDFLARE-SCHEDULER.md](docs/CLOUDFLARE-SCHEDULER.md).
 
 ## Cuota
 
@@ -99,7 +101,9 @@ La API usa `videos.list` para obtener estadísticas.
 
 ## Seguridad y datos
 
-- La API key vive únicamente en el secret `YT_API_KEY`.
+- La API key vive únicamente en el secret `YT_API_KEY` de GitHub.
+- El token de GitHub para el Worker se guarda como secreto `GITHUB_TOKEN` en Cloudflare y solo tiene permiso Actions: write en este repositorio.
+- El Worker solo inicia el workflow; no recibe la API key de YouTube ni procesa estadísticas.
 - `docs/stats.json` contiene datos públicos de estadísticas.
 - Si una actualización falla, el script no reemplaza unos datos buenos por un archivo vacío o parcial.
 
@@ -114,6 +118,9 @@ videos.txt
 config.json
 scripts/update.py
 tests/test_update.py
+cloudflare/worker.js
+wrangler.toml
+docs/CLOUDFLARE-SCHEDULER.md
 docs/index.html
 docs/stats.json
 .github/workflows/update.yml
