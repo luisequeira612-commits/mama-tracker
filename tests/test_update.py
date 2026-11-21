@@ -1,7 +1,20 @@
 import unittest
-from scripts.update import build_stats, percentage_tenths
+from scripts.update import build_stats, load_videos, percentage_tenths
 
 
+
+class ReferenceInventoryTests(unittest.TestCase):
+    def test_inventory_matches_reference_video_and_act_counts(self):
+        entries = load_videos()
+        self.assertEqual(len(entries), 69)
+        self.assertEqual(len({entry["id"] for entry in entries}), 69)
+        self.assertEqual(len({entry["key"] for entry in entries}), 26)
+
+    def test_taeyang_shared_stage_is_credited_to_bigbang(self):
+        entries = load_videos()
+        shared = next(entry for entry in entries if entry["id"] == "FGBnglnOBsE")
+        self.assertEqual(shared["artist"], "BIGBANG")
+        self.assertFalse(shared["collab"])
 
 class PercentageRoundingTests(unittest.TestCase):
     def test_rounded_act_percentages_sum_to_exactly_100_percent(self):
