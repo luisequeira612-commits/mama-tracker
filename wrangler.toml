@@ -1,0 +1,7 @@
+name = "mama-tracker-scheduler"
+main = "cloudflare/worker.js"
+compatibility_date = "2026-11-21"
+workers_dev = false
+
+[triggers]
+crons = ["13,43 * * * *"]
