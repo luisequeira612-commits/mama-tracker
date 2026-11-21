@@ -2,9 +2,6 @@ name: Update MAMA stats
 
 on:
   workflow_dispatch:
-  schedule:
-    # Every 15 minutes.
-    - cron: "*/15 * * * *"
   push:
     branches: [main]
     paths:
@@ -31,7 +28,7 @@ jobs:
 
       - name: Update stats
         env:
-          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          YT_API_KEY: \${{ secrets.YT_API_KEY }}
         run: python scripts/update.py
 
       - name: Commit changed stats
