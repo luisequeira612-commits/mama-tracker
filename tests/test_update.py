@@ -63,6 +63,8 @@ class CollaborationViewTests(unittest.TestCase):
         self.assertEqual(acts["Act B"]["views"], 50)
         self.assertEqual(acts["Act B"]["collab_views"], 0)
         self.assertEqual(sum(act["views"] for act in stats["acts"]), 200)
+        self.assertNotIn("hours_since_start_text", stats)
+        self.assertRegex(stats["updated_kst_text"], r"^\d{1,2} [A-Z][a-z]{2} at \d{2}:\d{2} KST$")
 
 
 if __name__ == "__main__":
