@@ -6,7 +6,7 @@ import sys
 import tempfile
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VIDEOS = os.path.join(ROOT, "videos.txt")
