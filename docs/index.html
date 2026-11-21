@@ -116,18 +116,11 @@
     .bar { height: 100%; width: 0; background: var(--gold); border-radius: inherit; transition: width 900ms ease; }
     .top-share-track { height: 5px; margin-top: 10px; background: #3a416e; border-radius: 99px; overflow: hidden; }
     .top-share-fill { height: 100%; background: var(--gold); border-radius: inherit; }
-    .radar { margin: 22px 0 28px; padding: 16px 18px; border: 1px solid rgba(199,139,255,.55); border-radius: 14px; background: var(--card); }
-    .radar h2 { margin: 0; color: var(--accent-soft); font: italic 600 27px/1.1 "Cormorant Garamond", serif; }
-    .radar-intro { margin: 6px 0 12px; color: var(--muted); font-size: 11px; line-height: 1.5; }
-    .radar-row { display: grid; grid-template-columns: 30px 64px minmax(0,1fr) auto; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
-    .radar-rank { color: var(--muted); font: 600 20px "Cormorant Garamond",serif; }
-    .radar-thumb { width: 64px; aspect-ratio: 16/9; object-fit: cover; border-radius: 5px; background: #20264c; }
-    .radar-name { min-width: 0; }
-    .radar-artist { color: var(--white); font-size: 13px; font-weight: 600; }
-    .radar-title { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.35; text-decoration: none; overflow-wrap: anywhere; }
-    .radar-rate { color: var(--accent-soft); font: 600 14px ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; text-align: right; }
-    .radar-gain { display: block; margin-top: 3px; color: var(--muted); font: 400 10px Inter,sans-serif; }
-    .radar-empty { padding: 14px 0 2px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .growth-note { margin-top: 5px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+    .artist { display: flex; flex-direction: column; gap: 4px; }
+    .artist-name { color: var(--gold); font: italic 700 clamp(23px, 6vw, 34px)/1.05 "Cormorant Garamond", serif; overflow-wrap: anywhere; }
+    .artist-growth, .row-growth { color: #d9b7ef; font: 500 10px/1.35 Inter, system-ui, sans-serif; letter-spacing: 0; }
+    .row-growth { margin-top: 4px; }
     .collabs { margin-top: 30px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
     .collabs h2 { margin: 0; color: var(--gold); font: italic 600 27px/1.1 "Cormorant Garamond", serif; }
     .collabs-intro { margin: 6px 0 14px; color: var(--muted); font-size: 11px; line-height: 1.5; }
@@ -149,10 +142,6 @@
       .artist { font-size: clamp(22px, 6.2vw, 29px); }
       .views { font-size: clamp(30px, 8vw, 38px); }
       .row { grid-template-columns: 38px minmax(0, 1fr); }
-      .radar { padding: 14px; }
-      .radar-row { grid-template-columns: 22px 56px minmax(0,1fr); gap: 8px; }
-      .radar-thumb { width: 56px; }
-      .radar-rate { grid-column: 3; text-align: left; }
       .right { grid-column: 2; justify-content: space-between; }
       .mini-thumbs { display: none; }
       .rowviews { text-align: left; min-width: 0; }
@@ -169,6 +158,7 @@
     <h1><em>MAMA 2026</em> <span style="font:500 .42em Inter,sans-serif;letter-spacing:0;color:var(--muted)">RANKING</span> <span class="credit">Sitio web creado por Luis Sequeira · Twitter: <a href="https://twitter.com/cryforasa" target="_blank" rel="noopener">@cryforasa</a></span></h1>
     <div id="meta" class="meta">Cargando datos…</div>
     <div id="updated" class="updated">—</div>
+    <div id="growth-note" class="growth-note">Crecimiento de vistas por artista · estimación de la última hora</div>
     <div id="demo" class="demo" hidden>Datos de ejemplo</div>
   </header>
   <section id="app" aria-live="polite"></section>
@@ -179,8 +169,15 @@
   const app = document.querySelector("#app");
   const meta = document.querySelector("#meta");
   const updated = document.querySelector("#updated");
+  const growthNote = document.querySelector("#growth-note");
   const demo = document.querySelector("#demo");
   const nf = new Intl.NumberFormat("en-US");
+
+  function growthText(value) {
+    const amount = Number(value) || 0;
+    const sign = amount < 0 ? "−" : "+";
+    return sign + nf.format(Math.abs(amount)) + " en la última hora";
+  }
 
   function detail(act) {
     const songs = act.songs === 1 ? "canción" : "canciones";
@@ -243,6 +240,9 @@
     meta.textContent = `${data.total_acts} artistas · ${data.total_videos} vídeos · ${nf.format(data.total_views)} reproducciones · ${data.day}`;
     updated.textContent = data.updated_kst_text ? `Actualizado: ${data.updated_kst_text}` : "Datos aún no actualizados";
     demo.hidden = !data.demo;
+    growthNote.textContent = data.growth_available
+      ? "Vistas ganadas por artista · estimación basada en capturas de la última hora"
+      : "Recopilando capturas para calcular las vistas ganadas por hora";
     app.innerHTML = "";
 
     const first = data.acts[0];
@@ -257,7 +257,16 @@
 
     const artist = document.createElement("div");
     artist.className = "artist";
-    artist.textContent = first.artist;
+    const artistName = document.createElement("div");
+    artistName.className = "artist-name";
+    artistName.textContent = first.artist;
+    artist.appendChild(artistName);
+    if (data.growth_available) {
+      const growth = document.createElement("div");
+      growth.className = "artist-growth";
+      growth.textContent = growthText(first.views_gained_last_hour);
+      artist.appendChild(growth);
+    }
 
     topline.append(no, artist);
 
@@ -310,12 +319,20 @@
       const rowartist = document.createElement("div");
       rowartist.className = "rowartist";
       rowartist.textContent = act.artist;
+      if (data.growth_available) {
+        const growth = document.createElement("div");
+        growth.className = "row-growth";
+        growth.textContent = growthText(act.views_gained_last_hour);
+        name.append(rowartist, growth);
+      } else {
+        name.appendChild(rowartist);
+      }
       const rowdetail = document.createElement("div");
       rowdetail.className = "rowdetail";
       const actShare = totalViews > 0 ? (act.views / totalViews * 100) : 0;
       const displayedShare = displayedShares[data.acts.indexOf(act)] / 10;
       rowdetail.textContent = `${detail(act)} · ${displayedShare.toFixed(1)}% del total`;
-      name.append(rowartist, rowdetail);
+      name.appendChild(rowdetail);
 
       const right = document.createElement("div");
       right.className = "right";
@@ -340,62 +357,6 @@
 
     app.appendChild(rows);
 
-    const radar = data.radar || { available: false, videos: [] };
-    const radarSection = document.createElement("section");
-    radarSection.className = "radar";
-    const radarHeading = document.createElement("h2");
-    radarHeading.textContent = "K-pop Radar";
-    const radarIntro = document.createElement("p");
-    radarIntro.className = "radar-intro";
-    radarIntro.textContent = radar.available
-      ? `Los 10 vídeos que más rápido están creciendo · últimas ${radar.window_minutes} min`
-      : "Estamos recopilando las primeras capturas. El radar aparecerá cuando haya al menos 45–60 minutos de historial.";
-    radarSection.append(radarHeading, radarIntro);
-
-    if (radar.available && radar.videos.length > 0) {
-      radar.videos.forEach((video, index) => {
-        const row = document.createElement("article");
-        row.className = "radar-row";
-        const rank = document.createElement("div");
-        rank.className = "radar-rank";
-        rank.textContent = String(index + 1).padStart(2, "0");
-        const link = thumb(video.id, false, video.title);
-        const img = link.querySelector("img");
-        img.className = "radar-thumb";
-        const name = document.createElement("div");
-        name.className = "radar-name";
-        const artistName = document.createElement("div");
-        artistName.className = "radar-artist";
-        artistName.textContent = video.artist;
-        const title = document.createElement("a");
-        title.className = "radar-title";
-        title.href = `https://www.youtube.com/watch?v=${encodeURIComponent(video.id)}`;
-        title.target = "_blank";
-        title.rel = "noopener";
-        title.textContent = video.title || "Abrir vídeo en YouTube";
-        name.append(artistName, title);
-        const rate = document.createElement("div");
-        rate.className = "radar-rate";
-        rate.textContent = `+${nf.format(video.views_per_hour)} / h`;
-        const gain = document.createElement("span");
-        gain.className = "radar-gain";
-        gain.textContent = `+${nf.format(video.views_gained)} en el periodo`;
-        rate.appendChild(gain);
-        row.append(rank, link, name, rate);
-        radarSection.appendChild(row);
-      });
-    } else if (radar.available) {
-      const empty = document.createElement("div");
-      empty.className = "radar-empty";
-      empty.textContent = "Todavía no hay aumentos positivos de vistas en los vídeos registrados.";
-      radarSection.appendChild(empty);
-    } else {
-      const empty = document.createElement("div");
-      empty.className = "radar-empty";
-      empty.textContent = "El ranking se activará automáticamente al completar la primera hora de mediciones.";
-      radarSection.appendChild(empty);
-    }
-    app.appendChild(radarSection);
 
 
     const collaborationTotal = Number(data.total_collaboration_views) ||
