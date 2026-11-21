@@ -6,7 +6,7 @@ import sys
 import tempfile
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VIDEOS = os.path.join(ROOT, "videos.txt")
@@ -143,18 +143,6 @@ def fetch_all(entries, api_key):
     return found
 
 
-def elapsed_text(start_iso, day):
-    start = datetime.fromisoformat(start_iso)
-    now = datetime.now(timezone.utc)
-    seconds = max(0, int((now - start).total_seconds()))
-    minutes = seconds // 60
-    hours, minutes = divmod(minutes, 60)
-    days, hours = divmod(hours, 24)
-
-    elapsed = f"{days}d {hours}h {minutes}m" if days else f"{hours}h {minutes}m"
-    return f"{elapsed} after MAMA {day} began"
-
-
 def percentage_tenths(values, total):
     if total <= 0:
         return [0 for _ in values]
@@ -215,10 +203,6 @@ def build_stats(entries, found, config):
     kst = now.astimezone(timezone(timedelta(hours=9)))
     updated_kst_text = kst.strftime("%-d %b at %H:%M KST")
 
-    start_key = f"{config['day'].lower().replace(' ', '')}_start_kst"
-    start_iso = config.get(start_key) or config.get("day1_start_kst")
-    if not start_iso:
-        fail(f"falta {start_key} en config.json")
 
     return {
         "demo": False,
@@ -226,7 +210,6 @@ def build_stats(entries, found, config):
         "day": config["day"],
         "updated": now.isoformat().replace("+00:00", "Z"),
         "updated_kst_text": updated_kst_text,
-        "hours_since_start_text": elapsed_text(start_iso, config.get("elapsed_since_label", config["day"])),
         "total_views": total_views,
         "total_collaboration_views": sum(act["collab_views"] for act in acts),
         "total_videos": len(entries),
