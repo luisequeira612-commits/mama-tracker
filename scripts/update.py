@@ -221,6 +221,82 @@ def calculate_artist_growth(history, entries, found, now):
     return {key: round(delta / elapsed_hours) for key, delta in gains.items()}
 
 
+
+def load_previous_stats(path=OUTPUT):
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+        if not isinstance(data, dict):
+            raise ValueError("stats.json debe contener un objeto")
+        return data
+    except Exception as exc:
+        fail(f"no se pudieron leer las estadísticas anteriores: {exc}")
+
+
+def kst_hour_bucket(moment):
+    kst = moment.astimezone(timezone(timedelta(hours=9)))
+    return kst.strftime("%Y-%m-%d %H")
+
+
+def preserve_hourly_growth(stats, previous_stats):
+    stats["growth_available"] = bool(previous_stats.get("growth_available", False))
+    if not stats["growth_available"]:
+        return
+
+    previous_acts = {
+        " ".join(act.get("artist", "").split()).casefold(): act
+        for act in previous_stats.get("acts", [])
+    }
+    for act in stats["acts"]:
+        key = " ".join(act["artist"].split()).casefold()
+        previous_act = previous_acts.get(key)
+        if previous_act is not None and "views_gained_last_hour" in previous_act:
+            act["views_gained_last_hour"] = previous_act["views_gained_last_hour"]
+        else:
+            act["views_gained_last_hour"] = 0
+
+    for field in ("growth_updated", "growth_updated_kst_text"):
+        if field in previous_stats:
+            stats[field] = previous_stats[field]
+
+
+def apply_hourly_growth(stats, history, entries, found, now, previous_stats):
+    current_bucket = kst_hour_bucket(now)
+    previous_bucket = previous_stats.get("growth_checked_hour_kst")
+
+    # Backfill the first hourly bucket from the last regular 15-minute update.
+    # This prevents a mid-hour deployment from causing an off-schedule refresh.
+    if not previous_bucket and previous_stats.get("updated"):
+        try:
+            previous_updated = datetime.fromisoformat(
+                previous_stats["updated"].replace("Z", "+00:00")
+            )
+            previous_bucket = kst_hour_bucket(previous_updated)
+        except (TypeError, ValueError):
+            previous_bucket = None
+
+    if previous_bucket == current_bucket:
+        preserve_hourly_growth(stats, previous_stats)
+    else:
+        artist_growth = calculate_artist_growth(history, entries, found, now)
+        if artist_growth is None:
+            # Keep the last valid hourly value rather than replacing it with
+            # fabricated zeros while a suitable historical baseline is absent.
+            preserve_hourly_growth(stats, previous_stats)
+        else:
+            for act in stats["acts"]:
+                artist_key = " ".join(act["artist"].split()).casefold()
+                act["views_gained_last_hour"] = artist_growth.get(artist_key, 0)
+            kst = now.astimezone(timezone(timedelta(hours=9)))
+            stats["growth_available"] = True
+            stats["growth_updated"] = now.isoformat().replace("+00:00", "Z")
+            stats["growth_updated_kst_text"] = kst.strftime("%d %b at %H:%M KST")
+
+    stats["growth_checked_hour_kst"] = current_bucket
+
+
 def build_stats(entries, found, config):
     groups = {}
 
@@ -318,12 +394,8 @@ def main():
     history = update_history(load_history(), found, now)
     atomic_write(history, HISTORY)
     stats = build_stats(entries, found, config)
-    artist_growth = calculate_artist_growth(history, entries, found, now)
-    stats["growth_available"] = artist_growth is not None
-    if artist_growth is not None:
-        for act in stats["acts"]:
-            artist_key = " ".join(act["artist"].split()).casefold()
-            act["views_gained_last_hour"] = artist_growth.get(artist_key, 0)
+    previous_stats = load_previous_stats()
+    apply_hourly_growth(stats, history, entries, found, now, previous_stats)
     atomic_write(stats)
     print(
         f"OK: {stats['total_videos']} videos, {stats['total_acts']} acts, "
