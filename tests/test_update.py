@@ -35,6 +35,44 @@ class PercentageRoundingTests(unittest.TestCase):
         self.assertEqual(percentage_tenths([10, 20], 0), [0, 0])
 
 
+class ViewsPerHourRadarTests(unittest.TestCase):
+    def test_radar_calculates_real_hourly_rate_and_ranks_videos(self):
+        from datetime import datetime, timezone, timedelta
+        from scripts.update import calculate_radar
+        now = datetime(2026, 11, 21, 12, 0, tzinfo=timezone.utc)
+        history = {"snapshots": [{
+            "captured_at": (now - timedelta(hours=1)).isoformat().replace("+00:00", "Z"),
+            "views": {"AAAAAAAAAAA": 1000, "BBBBBBBBBBB": 500},
+        }]}
+        entries = [
+            {"id": "AAAAAAAAAAA", "artist": "Act A"},
+            {"id": "BBBBBBBBBBB", "artist": "Act B"},
+        ]
+        found = {
+            "AAAAAAAAAAA": {"views": 1600, "title": "Video A"},
+            "BBBBBBBBBBB": {"views": 900, "title": "Video B"},
+        }
+        radar = calculate_radar(history, entries, found, now)
+        self.assertTrue(radar["available"])
+        self.assertEqual(radar["window_minutes"], 60)
+        self.assertEqual(radar["videos"][0]["id"], "AAAAAAAAAAA")
+        self.assertEqual(radar["videos"][0]["views_per_hour"], 600)
+        self.assertEqual(radar["videos"][1]["views_per_hour"], 400)
+
+    def test_radar_waits_until_a_valid_baseline_exists(self):
+        from datetime import datetime, timezone, timedelta
+        from scripts.update import calculate_radar
+        now = datetime(2026, 11, 21, 12, 0, tzinfo=timezone.utc)
+        history = {"snapshots": [{
+            "captured_at": (now - timedelta(minutes=30)).isoformat().replace("+00:00", "Z"),
+            "views": {"AAAAAAAAAAA": 100},
+        }]}
+        radar = calculate_radar(history, [{"id": "AAAAAAAAAAA", "artist": "Act"}],
+                                {"AAAAAAAAAAA": {"views": 200, "title": "Video"}}, now)
+        self.assertFalse(radar["available"])
+        self.assertEqual(radar["videos"], [])
+
+
 class CollaborationViewTests(unittest.TestCase):
     def test_collaboration_views_are_separate_without_double_counting_total(self):
         entries = [
