@@ -1,6 +1,6 @@
 # MAMA 2026 stage chart
 
-Tracker personal de reproducciones en YouTube para MAMA 2026 — Day 1.
+Tracker personal de reproducciones en YouTube para MAMA 2026 — Chapter 1 + Chapter 2 (ambos días en un ranking combinado).
 
 ## Qué hace
 
@@ -11,7 +11,8 @@ Tracker personal de reproducciones en YouTube para MAMA 2026 — Day 1.
 - Las colaboraciones se atribuyen a un acto principal para evitar filas duplicadas; se marcan con `collab`.
 - Muestra aparte las vistas y el porcentaje de los vídeos colaborativos, también atribuidos una sola vez al acto principal. Sus porcentajes visibles también suman exactamente 100.0%, y esta sección no vuelve a sumarse al ranking general.
 - Ordena los actos por vistas y destaca el #1.
-- Actualiza `docs/stats.json` cada 30 minutos mediante GitHub Actions.
+- Suma en un único ranking los vídeos oficiales de Chapter 1 y Chapter 2, agrupados por acto principal.
+- Actualiza `docs/stats.json` cada 15 minutos mediante Cloudflare Worker + GitHub Actions.
 - La página refresca los datos cada 5 minutos.
 - Usa GitHub Pages + GitHub Actions + YouTube Data API v3, sin servidor ni base de datos.
 
@@ -58,7 +59,7 @@ https://luisequeira612-commits.github.io/mama-tracker/
 
 Edita `videos.txt`.
 
-Inventario verificado de Chapter 1: **36 vídeos únicos y 14 actos principales**. BABYMONSTER figura con **2 canciones, 2 vídeos y 1 colaboración**. El vídeo independiente `DOCKING COMPLETE` de Street World Fighter está separado de la colaboración con BABYMONSTER.
+Inventario combinado de Chapter 1 y Chapter 2. Los vídeos oficiales de ambos días se mantienen en `videos.txt` y forman un solo ranking. BABYMONSTER figura con **2 canciones, 2 vídeos y 1 colaboración**. El vídeo independiente `DOCKING COMPLETE` de Street World Fighter está separado de la colaboración con BABYMONSTER.
 
 Formato:
 
@@ -86,7 +87,7 @@ Ve a:
 
 **Actions → Update MAMA stats → Run workflow**
 
-El workflow también se ejecuta automáticamente cada 30 minutos y cuando cambian `videos.txt` o `config.json`.
+El workflow se ejecuta automáticamente cada 15 minutos mediante Cloudflare y también cuando cambian `videos.txt` o `config.json`.
 
 ## Cuota
 
