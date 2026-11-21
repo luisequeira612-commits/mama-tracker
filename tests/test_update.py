@@ -35,42 +35,43 @@ class PercentageRoundingTests(unittest.TestCase):
         self.assertEqual(percentage_tenths([10, 20], 0), [0, 0])
 
 
-class ViewsPerHourRadarTests(unittest.TestCase):
-    def test_radar_calculates_real_hourly_rate_and_ranks_videos(self):
+class ArtistViewsGrowthTests(unittest.TestCase):
+    def test_growth_is_aggregated_by_artist_and_normalized_to_one_hour(self):
         from datetime import datetime, timezone, timedelta
-        from scripts.update import calculate_radar
+        from scripts.update import calculate_artist_growth
         now = datetime(2026, 11, 21, 12, 0, tzinfo=timezone.utc)
         history = {"snapshots": [{
-            "captured_at": (now - timedelta(hours=1)).isoformat().replace("+00:00", "Z"),
-            "views": {"AAAAAAAAAAA": 1000, "BBBBBBBBBBB": 500},
+            "captured_at": (now - timedelta(minutes=50)).isoformat().replace("+00:00", "Z"),
+            "views": {"AAAAAAAAAAA": 1000, "BBBBBBBBBBB": 500, "CCCCCCCCCCC": 200},
         }]}
         entries = [
-            {"id": "AAAAAAAAAAA", "artist": "Act A"},
-            {"id": "BBBBBBBBBBB", "artist": "Act B"},
+            {"id": "AAAAAAAAAAA", "artist": "Act A", "key": "act a"},
+            {"id": "BBBBBBBBBBB", "artist": "Act A", "key": "act a"},
+            {"id": "CCCCCCCCCCC", "artist": "Act B", "key": "act b"},
         ]
         found = {
-            "AAAAAAAAAAA": {"views": 1600, "title": "Video A"},
-            "BBBBBBBBBBB": {"views": 900, "title": "Video B"},
+            "AAAAAAAAAAA": {"views": 1500},
+            "BBBBBBBBBBB": {"views": 750},
+            "CCCCCCCCCCC": {"views": 250},
         }
-        radar = calculate_radar(history, entries, found, now)
-        self.assertTrue(radar["available"])
-        self.assertEqual(radar["window_minutes"], 60)
-        self.assertEqual(radar["videos"][0]["id"], "AAAAAAAAAAA")
-        self.assertEqual(radar["videos"][0]["views_per_hour"], 600)
-        self.assertEqual(radar["videos"][1]["views_per_hour"], 400)
+        growth = calculate_artist_growth(history, entries, found, now)
+        self.assertEqual(growth, {"act a": 900, "act b": 60})
 
-    def test_radar_waits_until_a_valid_baseline_exists(self):
+    def test_growth_waits_for_a_valid_baseline(self):
         from datetime import datetime, timezone, timedelta
-        from scripts.update import calculate_radar
+        from scripts.update import calculate_artist_growth
         now = datetime(2026, 11, 21, 12, 0, tzinfo=timezone.utc)
         history = {"snapshots": [{
             "captured_at": (now - timedelta(minutes=30)).isoformat().replace("+00:00", "Z"),
             "views": {"AAAAAAAAAAA": 100},
         }]}
-        radar = calculate_radar(history, [{"id": "AAAAAAAAAAA", "artist": "Act"}],
-                                {"AAAAAAAAAAA": {"views": 200, "title": "Video"}}, now)
-        self.assertFalse(radar["available"])
-        self.assertEqual(radar["videos"], [])
+        growth = calculate_artist_growth(
+            history,
+            [{"id": "AAAAAAAAAAA", "artist": "Act", "key": "act"}],
+            {"AAAAAAAAAAA": {"views": 200}},
+            now,
+        )
+        self.assertIsNone(growth)
 
 
 class CollaborationViewTests(unittest.TestCase):

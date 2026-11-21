@@ -197,7 +197,7 @@ def update_history(history, found, now):
     return history
 
 
-def calculate_radar(history, entries, found, now):
+def calculate_artist_growth(history, entries, found, now):
     candidates = []
     for snapshot in history.get("snapshots", []):
         captured = datetime.fromisoformat(snapshot["captured_at"].replace("Z", "+00:00"))
@@ -206,32 +206,20 @@ def calculate_radar(history, entries, found, now):
             candidates.append((abs(age_minutes - 60), captured, snapshot))
 
     if not candidates:
-        return {"available": False, "window_minutes": None, "videos": []}
+        return None
 
     _, captured, baseline = min(candidates, key=lambda item: item[0])
     elapsed_hours = (now - captured).total_seconds() / 3600
-    window_minutes = round(elapsed_hours * 60)
-    ranked = []
+    gains = {}
     for entry in entries:
-        video_id = entry["id"]
-        previous = baseline["views"].get(video_id)
-        current = found[video_id]["views"]
+        previous = baseline["views"].get(entry["id"])
         if previous is None:
             continue
-        delta = current - int(previous)
-        if delta <= 0:
-            continue
-        ranked.append({
-            "id": video_id,
-            "artist": entry["artist"],
-            "title": found[video_id]["title"],
-            "views": current,
-            "views_gained": delta,
-            "views_per_hour": round(delta / elapsed_hours),
-        })
+        delta = found[entry["id"]]["views"] - int(previous)
+        gains[entry["key"]] = gains.get(entry["key"], 0) + delta
 
-    ranked.sort(key=lambda item: (-item["views_per_hour"], -item["views_gained"], item["artist"].casefold()))
-    return {"available": True, "window_minutes": window_minutes, "videos": ranked[:10]}
+    return {key: round(delta / elapsed_hours) for key, delta in gains.items()}
+
 
 def build_stats(entries, found, config):
     groups = {}
@@ -330,7 +318,12 @@ def main():
     history = update_history(load_history(), found, now)
     atomic_write(history, HISTORY)
     stats = build_stats(entries, found, config)
-    stats["radar"] = calculate_radar(history, entries, found, now)
+    artist_growth = calculate_artist_growth(history, entries, found, now)
+    stats["growth_available"] = artist_growth is not None
+    if artist_growth is not None:
+        for act in stats["acts"]:
+            artist_key = " ".join(act["artist"].split()).casefold()
+            act["views_gained_last_hour"] = artist_growth.get(artist_key, 0)
     atomic_write(stats)
     print(
         f"OK: {stats['total_videos']} videos, {stats['total_acts']} acts, "
