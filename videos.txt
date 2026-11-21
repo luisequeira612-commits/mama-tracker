@@ -1,48 +1,27 @@
-# MAMA 2026 — Chapter 1
-# Formato: Acto principal | URL o ID | canciones únicas atribuidas al acto | collab
-# Solo IDs oficiales confirmados. No inventar IDs.
-# Las colaboraciones se atribuyen una sola vez al acto principal para evitar duplicar vídeos.
-# BABYMONSTER incluye su actuación y el vídeo conjunto con Street World Fighter.
-# Street World Fighter tiene además su vídeo independiente DOCKING COMPLETE.
-# Los vídeos completos contabilizan cada canción una sola vez; sus cortes usan songs=0.
-# songs cuenta canciones propias del acto; los vídeos colaborativos se cuentan en collabs y no inflan songs.
+# MAMA 2026 — Chapter 2 / Day 2
+# Solo y principales: solo IDs oficiales confirmados.
+# En actuaciones compartidas, se atribuye el vídeo una sola vez al acto principal.
+# Los vídeos completos cuentan sus canciones; cortes individuales usan songs=0.
 
-BABYMONSTER | iIaw6HvS09Y | 2
-BABYMONSTER | 3JvKNtTN3jk | 0 | collab
-STREET WORLD FIGHTER | 7IzRrfKEfpw | 1
-ENHYPEN | rBbQ32y7Xm0 | 0
-ENHYPEN | glURXZmyTI8 | 0
-ENHYPEN | mYuGfSa1E6A | 0
-RESCENE | XW0jCabK8vU | 2
-ALPHA DRIVE ONE | TKwLRxhesnQ | 3
-Hearts2Hearts | 9KPXhIiRn2U | 2
-INI | 7x1ANdAOjIY | 2
-ILLIT | a7xzBj-vYQ8 | 3
-NCT WISH | f5zeVTLO9sA | 2
-TREASURE | 3D8IjUemw1c | 3
-CL | bLzWombcRLU | 2
-CL | 4Y_tDLBs8Pw | 2
-ALLDAY PROJECT | _a3wgovmNc8 | 1
-PANIC | FELp5S31uJU | 0 | collab
-PANIC | BEOkuAZwfXg | 0 | collab
-PANIC | fyBnlSRxySg | 2 | collab
-LNGSHOT X MODYSSEY X TUIDE | 2UitQkvkNqI | 5 | collab
-LNGSHOT X MODYSSEY X TUIDE | zWcqximR6T0 | 0 | collab
-LNGSHOT X MODYSSEY X TUIDE | 0lJNbLrUecg | 0 | collab
-CL | _Kfx4L0p3SI | 0 | collab
-ENHYPEN | n9iu72mjil0 | 4
+KO1KEYZ | YIMaI1j6l-8 | 3
+izna | Zg8RGFW3sr0 | 5 | collab
+&TEAM | RsEfO9HD1-A | 1
+CORTIS | ust4rA6wK9E | 2
+NAYEON | XlDMWVqYfqg | 3
+ZEROBASEONE | Rf0sUnTXr34 | 4
+WOODZ | b-ivUp5KmrU | 1
+HWASA | vvJIhvxkAjo | 2
+LE SSERAFIM | o0MlNWgDjaM | 2
+IVE | oRA3eTWh5Jk | 3
+TAEYANG | FGBnglnOBsE | 2
+BIGBANG | f0-Oq0kh298 | 3
 
-# Cortes individuales oficiales de Mnet K-POP (@Mnet).
-# songs=0 en estos cortes porque las canciones ya se cuentan en el vídeo completo del mismo acto.
-RESCENE | FzC51U9aB4s | 0
-RESCENE | Nja097GTVXE | 0
-ALPHA DRIVE ONE | mfzws4hBQ5Q | 0
-ALPHA DRIVE ONE | USErbT-TpMs | 0
-Hearts2Hearts | i6bW_HTcYeM | 0
-Hearts2Hearts | sLYoWIWTZ8U | 0
-NCT WISH | NwgEZfm9VFs | 0
-NCT WISH | f0BiLdY8LDE | 0
-ILLIT | _IX6zWGr9gk | 0
-ILLIT | 26Jb6BZ2ga4 | 0
-TREASURE | 5jnLmnb7dZk | 0
-TREASURE | G0jizVgFNIM | 0
+# Cortes individuales oficiales de Mnet K-POP.
+# Se mantienen en songs=0 porque las canciones ya se cuentan en el vídeo completo.
+IVE | Luov2TyDRKo | 0
+IVE | wX93GGEMwgI | 0
+LE SSERAFIM | Yq8rkM9PR_c | 0
+KO1KEYZ | 7zAjKMijlWU | 0
+KO1KEYZ | 2c62JSYxXnA | 0
+izna | 6E0VuaxU | 0 | collab
+NAYEON | — | 0
