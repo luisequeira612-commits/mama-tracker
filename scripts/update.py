@@ -226,7 +226,7 @@ def build_stats(entries, found, config):
         "day": config["day"],
         "updated": now.isoformat().replace("+00:00", "Z"),
         "updated_kst_text": updated_kst_text,
-        "hours_since_start_text": elapsed_text(start_iso, config["day"]),
+        "hours_since_start_text": elapsed_text(start_iso, config.get("elapsed_since_label", config["day"])),
         "total_views": total_views,
         "total_collaboration_views": sum(act["collab_views"] for act in acts),
         "total_videos": len(entries),
