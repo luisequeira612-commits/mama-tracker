@@ -116,6 +116,18 @@
     .bar { height: 100%; width: 0; background: var(--gold); border-radius: inherit; transition: width 900ms ease; }
     .top-share-track { height: 5px; margin-top: 10px; background: #3a416e; border-radius: 99px; overflow: hidden; }
     .top-share-fill { height: 100%; background: var(--gold); border-radius: inherit; }
+    .radar { margin: 22px 0 28px; padding: 16px 18px; border: 1px solid rgba(199,139,255,.55); border-radius: 14px; background: var(--card); }
+    .radar h2 { margin: 0; color: var(--accent-soft); font: italic 600 27px/1.1 "Cormorant Garamond", serif; }
+    .radar-intro { margin: 6px 0 12px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .radar-row { display: grid; grid-template-columns: 30px 64px minmax(0,1fr) auto; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+    .radar-rank { color: var(--muted); font: 600 20px "Cormorant Garamond",serif; }
+    .radar-thumb { width: 64px; aspect-ratio: 16/9; object-fit: cover; border-radius: 5px; background: #20264c; }
+    .radar-name { min-width: 0; }
+    .radar-artist { color: var(--white); font-size: 13px; font-weight: 600; }
+    .radar-title { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.35; text-decoration: none; overflow-wrap: anywhere; }
+    .radar-rate { color: var(--accent-soft); font: 600 14px ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; text-align: right; }
+    .radar-gain { display: block; margin-top: 3px; color: var(--muted); font: 400 10px Inter,sans-serif; }
+    .radar-empty { padding: 14px 0 2px; color: var(--muted); font-size: 12px; line-height: 1.5; }
     .collabs { margin-top: 30px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
     .collabs h2 { margin: 0; color: var(--gold); font: italic 600 27px/1.1 "Cormorant Garamond", serif; }
     .collabs-intro { margin: 6px 0 14px; color: var(--muted); font-size: 11px; line-height: 1.5; }
@@ -137,6 +149,10 @@
       .artist { font-size: clamp(22px, 6.2vw, 29px); }
       .views { font-size: clamp(30px, 8vw, 38px); }
       .row { grid-template-columns: 38px minmax(0, 1fr); }
+      .radar { padding: 14px; }
+      .radar-row { grid-template-columns: 22px 56px minmax(0,1fr); gap: 8px; }
+      .radar-thumb { width: 56px; }
+      .radar-rate { grid-column: 3; text-align: left; }
       .right { grid-column: 2; justify-content: space-between; }
       .mini-thumbs { display: none; }
       .rowviews { text-align: left; min-width: 0; }
@@ -276,6 +292,64 @@
 
     top.append(topline, views, det, topShareTrack, thumbs);
     app.appendChild(top);
+
+
+    const radar = data.radar || { available: false, videos: [] };
+    const radarSection = document.createElement("section");
+    radarSection.className = "radar";
+    const radarHeading = document.createElement("h2");
+    radarHeading.textContent = "K-pop Radar";
+    const radarIntro = document.createElement("p");
+    radarIntro.className = "radar-intro";
+    radarIntro.textContent = radar.available
+      ? `Los 10 vídeos que más rápido están creciendo · últimas ${radar.window_minutes} min`
+      : "Estamos recopilando las primeras capturas. El radar aparecerá cuando haya al menos 45–60 minutos de historial.";
+    radarSection.append(radarHeading, radarIntro);
+
+    if (radar.available && radar.videos.length > 0) {
+      radar.videos.forEach((video, index) => {
+        const row = document.createElement("article");
+        row.className = "radar-row";
+        const rank = document.createElement("div");
+        rank.className = "radar-rank";
+        rank.textContent = String(index + 1).padStart(2, "0");
+        const link = thumb(video.id, false, video.title);
+        const img = link.querySelector("img");
+        img.className = "radar-thumb";
+        const name = document.createElement("div");
+        name.className = "radar-name";
+        const artistName = document.createElement("div");
+        artistName.className = "radar-artist";
+        artistName.textContent = video.artist;
+        const title = document.createElement("a");
+        title.className = "radar-title";
+        title.href = `https://www.youtube.com/watch?v=${encodeURIComponent(video.id)}`;
+        title.target = "_blank";
+        title.rel = "noopener";
+        title.textContent = video.title || "Abrir vídeo en YouTube";
+        name.append(artistName, title);
+        const rate = document.createElement("div");
+        rate.className = "radar-rate";
+        rate.textContent = `+${nf.format(video.views_per_hour)} / h`;
+        const gain = document.createElement("span");
+        gain.className = "radar-gain";
+        gain.textContent = `+${nf.format(video.views_gained)} en el periodo`;
+        rate.appendChild(gain);
+        row.append(rank, link, name, rate);
+        radarSection.appendChild(row);
+      });
+    } else if (radar.available) {
+      const empty = document.createElement("div");
+      empty.className = "radar-empty";
+      empty.textContent = "Todavía no hay aumentos positivos de vistas en los vídeos registrados.";
+      radarSection.appendChild(empty);
+    } else {
+      const empty = document.createElement("div");
+      empty.className = "radar-empty";
+      empty.textContent = "El ranking se activará automáticamente al completar la primera hora de mediciones.";
+      radarSection.appendChild(empty);
+    }
+    app.appendChild(radarSection);
 
     const rows = document.createElement("div");
     rows.className = "rows";
