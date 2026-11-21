@@ -225,7 +225,7 @@
     }
 
     meta.textContent = `${data.total_acts} artistas · ${data.total_videos} vídeos · ${nf.format(data.total_views)} reproducciones · ${data.day}`;
-    updated.textContent = data.updated_kst_text ? `Actualizado: ${data.updated_kst_text} · ${data.hours_since_start_text || ""}` : "Datos aún no actualizados";
+    updated.textContent = data.updated_kst_text ? `Actualizado: ${data.updated_kst_text}` : "Datos aún no actualizados";
     demo.hidden = !data.demo;
     app.innerHTML = "";
 
