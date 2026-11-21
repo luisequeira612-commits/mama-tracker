@@ -24,11 +24,13 @@ ALLDAY PROJECT | _a3wgovmNc8 | 1
 PANIC | FELp5S31uJU | 0 | collab
 PANIC | BEOkuAZwfXg | 0 | collab
 PANIC | fyBnlSRxySg | 2 | collab
+PANIC | BmmpLVVcpZ0 | 0 | collab
 LNGSHOT X MODYSSEY X TUIDE | 2UitQkvkNqI | 5 | collab
 LNGSHOT X MODYSSEY X TUIDE | zWcqximR6T0 | 0 | collab
 LNGSHOT X MODYSSEY X TUIDE | 0lJNbLrUecg | 0 | collab
 CL | _Kfx4L0p3SI | 0 | collab
 ENHYPEN | n9iu72mjil0 | 4
+ENHYPEN | BaDslhYJRp4 | 0
 
 # Cortes individuales oficiales de Mnet K-POP (@Mnet).
 # songs=0 en estos cortes porque las canciones ya se cuentan en el vídeo completo del mismo acto.
@@ -44,6 +46,7 @@ ILLIT | _IX6zWGr9gk | 0
 ILLIT | 26Jb6BZ2ga4 | 0
 TREASURE | 5jnLmnb7dZk | 0
 TREASURE | G0jizVgFNIM | 0
+TREASURE | mYjA50Wy-Nc | 0
 
 # MAMA 2026 — Chapter 2 / Day 2
 # Solo IDs oficiales confirmados.
@@ -52,21 +55,36 @@ TREASURE | G0jizVgFNIM | 0
 
 KO1KEYZ | YIMaI1j6l-8 | 3
 izna | Zg8RGFW3sr0 | 6 | collab
+izna | 6E0VuaxUoQE | 0 | collab
+izna | w3Tbt_CMvXs | 0 | collab
 &TEAM | RsEfO9HD1-A | 1
 CORTIS | ust4rA6wK9E | 2
+CORTIS | E6enZitPATw | 0
+CORTIS | 37sl4AGWO9Q | 0
 NAYEON | XlDMWVqYfqg | 3
+NAYEON | 1XFI-qTSt_c | 0
+NAYEON | MA3IESn9Dqo | 0
 ZEROBASEONE | Rf0sUnTXr34 | 4
+ZEROBASEONE | O6qTamopoMI | 0
+ZEROBASEONE | 2_VEINOSqtE | 0
 WOODZ | b-ivUp5KmrU | 1
+WOODZ | dRMoSstqGqw | 0 | collab
 HWASA | vvJIhvxkAjo | 2
 LE SSERAFIM | o0MlNWgDjaM | 2
 IVE | oRA3eTWh5Jk | 3
-TAEYANG | FGBnglnOBsE | 2
+BIGBANG | FGBnglnOBsE | 0
 BIGBANG | f0-Oq0kh298 | 3
+BIGBANG | FHl9ST9GaKE | 0
+BIGBANG | WLhXrEjMAZE | 0
 
 # Cortes individuales oficiales de Mnet K-POP.
 # Se mantienen en songs=0 porque las canciones ya se cuentan en el vídeo completo.
 IVE | Luov2TyDRKo | 0
 IVE | wX93GGEMwgI | 0
 LE SSERAFIM | Yq8rkM9PR_c | 0
+LE SSERAFIM | sOh8cxcu820 | 0
 KO1KEYZ | 7zAjKMijlWU | 0
 KO1KEYZ | 2c62JSYxXnA | 0
+
+# I.O.I recibe su corte compartido por separado, como en el tracker de referencia.
+I.O.I | ZIgbTMs1eX0 | 0 | collab
