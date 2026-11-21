@@ -28,7 +28,7 @@ jobs:
 
       - name: Update stats
         env:
-          YT_API_KEY: \${{ secrets.YT_API_KEY }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
         run: python scripts/update.py
 
       - name: Commit changed stats
