@@ -1,5 +1,5 @@
 import unittest
-from scripts.update import build_stats, load_videos, percentage_tenths
+from scripts.update import apply_hourly_growth, build_stats, load_videos, percentage_tenths
 
 
 
@@ -72,6 +72,73 @@ class ArtistViewsGrowthTests(unittest.TestCase):
             now,
         )
         self.assertIsNone(growth)
+
+
+class HourlyGrowthRefreshTests(unittest.TestCase):
+    def setUp(self):
+        from datetime import datetime, timezone, timedelta
+        self.datetime = datetime
+        self.timezone = timezone
+        self.timedelta = timedelta
+        self.entries = [
+            {"id": "AAAAAAAAAAA", "artist": "Act A", "key": "act a"},
+            {"id": "BBBBBBBBBBB", "artist": "Act A", "key": "act a"},
+        ]
+        self.found = {
+            "AAAAAAAAAAA": {"views": 1500},
+            "BBBBBBBBBBB": {"views": 750},
+        }
+        self.stats = {"acts": [{"artist": "Act A"}]}
+
+    def test_same_kst_hour_preserves_previous_growth(self):
+        now = self.datetime(2026, 11, 21, 12, 15, tzinfo=self.timezone.utc)
+        previous = {
+            "updated": "2026-11-21T12:02:00Z",
+            "growth_available": True,
+            "growth_updated_kst_text": "21 Nov at 21:00 KST",
+            "acts": [{"artist": "Act A", "views_gained_last_hour": 480}],
+        }
+        history = {"snapshots": [{
+            "captured_at": (now - self.timedelta(minutes=50)).isoformat().replace("+00:00", "Z"),
+            "views": {"AAAAAAAAAAA": 1000, "BBBBBBBBBBB": 500},
+        }]}
+        apply_hourly_growth(self.stats, history, self.entries, self.found, now, previous)
+        self.assertEqual(self.stats["acts"][0]["views_gained_last_hour"], 480)
+        self.assertEqual(self.stats["growth_checked_hour_kst"], "2026-11-21 21")
+        self.assertEqual(self.stats["growth_updated_kst_text"], "21 Nov at 21:00 KST")
+
+    def test_new_kst_hour_recalculates_growth(self):
+        now = self.datetime(2026, 11, 21, 13, 0, tzinfo=self.timezone.utc)
+        previous = {
+            "updated": "2026-11-21T12:55:00Z",
+            "growth_available": True,
+            "acts": [{"artist": "Act A", "views_gained_last_hour": 480}],
+        }
+        history = {"snapshots": [{
+            "captured_at": (now - self.timedelta(minutes=50)).isoformat().replace("+00:00", "Z"),
+            "views": {"AAAAAAAAAAA": 1000, "BBBBBBBBBBB": 500},
+        }]}
+        apply_hourly_growth(self.stats, history, self.entries, self.found, now, previous)
+        self.assertEqual(self.stats["acts"][0]["views_gained_last_hour"], 900)
+        self.assertEqual(self.stats["growth_checked_hour_kst"], "2026-11-21 22")
+        self.assertEqual(self.stats["growth_updated_kst_text"], "21 Nov at 22:00 KST")
+
+    def test_missing_baseline_keeps_last_valid_value(self):
+        now = self.datetime(2026, 11, 21, 13, 0, tzinfo=self.timezone.utc)
+        previous = {
+            "updated": "2026-11-21T12:55:00Z",
+            "growth_available": True,
+            "growth_updated_kst_text": "21 Nov at 21:00 KST",
+            "acts": [{"artist": "Act A", "views_gained_last_hour": 480}],
+        }
+        history = {"snapshots": [{
+            "captured_at": (now - self.timedelta(minutes=30)).isoformat().replace("+00:00", "Z"),
+            "views": {"AAAAAAAAAAA": 1000, "BBBBBBBBBBB": 500},
+        }]}
+        apply_hourly_growth(self.stats, history, self.entries, self.found, now, previous)
+        self.assertEqual(self.stats["acts"][0]["views_gained_last_hour"], 480)
+        self.assertEqual(self.stats["growth_updated_kst_text"], "21 Nov at 21:00 KST")
+
 
 
 class CollaborationViewTests(unittest.TestCase):
