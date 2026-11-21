@@ -12,6 +12,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VIDEOS = os.path.join(ROOT, "videos.txt")
 CONFIG = os.path.join(ROOT, "config.json")
 OUTPUT = os.path.join(ROOT, "docs", "stats.json")
+HISTORY = os.path.join(ROOT, "data", "view_history.json")
 API = "https://www.googleapis.com/youtube/v3/videos"
 
 VIDEO_ID_RE = re.compile(r"^[A-Za-z0-9_-]{11}$")
@@ -159,6 +160,79 @@ def percentage_tenths(values, total):
     return allocated
 
 
+
+def load_history():
+    if not os.path.exists(HISTORY):
+        return {"snapshots": []}
+    try:
+        with open(HISTORY, encoding="utf-8") as fh:
+            data = json.load(fh)
+        if not isinstance(data.get("snapshots"), list):
+            raise ValueError("snapshots debe ser una lista")
+        return data
+    except Exception as exc:
+        fail(f"no se pudo leer el historial de vistas: {exc}")
+
+
+def update_history(history, found, now):
+    snapshots = history.setdefault("snapshots", [])
+    snapshot = {
+        "captured_at": now.isoformat().replace("+00:00", "Z"),
+        "views": {video_id: video["views"] for video_id, video in found.items()},
+    }
+    if snapshots:
+        last_time = datetime.fromisoformat(snapshots[-1]["captured_at"].replace("Z", "+00:00"))
+        if (now - last_time).total_seconds() < 300:
+            snapshots[-1] = snapshot
+        else:
+            snapshots.append(snapshot)
+    else:
+        snapshots.append(snapshot)
+
+    cutoff = now.timestamp() - 24 * 60 * 60
+    history["snapshots"] = [
+        item for item in snapshots
+        if datetime.fromisoformat(item["captured_at"].replace("Z", "+00:00")).timestamp() >= cutoff
+    ]
+    return history
+
+
+def calculate_radar(history, entries, found, now):
+    candidates = []
+    for snapshot in history.get("snapshots", []):
+        captured = datetime.fromisoformat(snapshot["captured_at"].replace("Z", "+00:00"))
+        age_minutes = (now - captured).total_seconds() / 60
+        if 45 <= age_minutes <= 75:
+            candidates.append((abs(age_minutes - 60), captured, snapshot))
+
+    if not candidates:
+        return {"available": False, "window_minutes": None, "videos": []}
+
+    _, captured, baseline = min(candidates, key=lambda item: item[0])
+    elapsed_hours = (now - captured).total_seconds() / 3600
+    window_minutes = round(elapsed_hours * 60)
+    ranked = []
+    for entry in entries:
+        video_id = entry["id"]
+        previous = baseline["views"].get(video_id)
+        current = found[video_id]["views"]
+        if previous is None:
+            continue
+        delta = current - int(previous)
+        if delta <= 0:
+            continue
+        ranked.append({
+            "id": video_id,
+            "artist": entry["artist"],
+            "title": found[video_id]["title"],
+            "views": current,
+            "views_gained": delta,
+            "views_per_hour": round(delta / elapsed_hours),
+        })
+
+    ranked.sort(key=lambda item: (-item["views_per_hour"], -item["views_gained"], item["artist"].casefold()))
+    return {"available": True, "window_minutes": window_minutes, "videos": ranked[:10]}
+
 def build_stats(entries, found, config):
     groups = {}
 
@@ -218,16 +292,16 @@ def build_stats(entries, found, config):
     }
 
 
-def atomic_write(data):
-    os.makedirs(os.path.dirname(OUTPUT), exist_ok=True)
+def atomic_write(data, path=OUTPUT):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     fd, temp_path = tempfile.mkstemp(
-        prefix="stats.", suffix=".json", dir=os.path.dirname(OUTPUT)
+        prefix="stats.", suffix=".json", dir=os.path.dirname(path)
     )
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as fh:
             json.dump(data, fh, ensure_ascii=False, indent=2)
             fh.write("\n")
-        os.replace(temp_path, OUTPUT)
+        os.replace(temp_path, path)
     except Exception:
         try:
             os.unlink(temp_path)
@@ -252,7 +326,11 @@ def main():
 
     entries = load_videos()
     found = fetch_all(entries, api_key)
+    now = datetime.now(timezone.utc)
+    history = update_history(load_history(), found, now)
+    atomic_write(history, HISTORY)
     stats = build_stats(entries, found, config)
+    stats["radar"] = calculate_radar(history, entries, found, now)
     atomic_write(stats)
     print(
         f"OK: {stats['total_videos']} videos, {stats['total_acts']} acts, "
