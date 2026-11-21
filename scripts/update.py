@@ -6,7 +6,7 @@ import sys
 import tempfile
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VIDEOS = os.path.join(ROOT, "videos.txt")
@@ -143,7 +143,7 @@ def fetch_all(entries, api_key):
     return found
 
 
-def elapsed_text(start_iso):
+def elapsed_text(start_iso, day):
     start = datetime.fromisoformat(start_iso)
     now = datetime.now(timezone.utc)
     seconds = max(0, int((now - start).total_seconds()))
@@ -151,17 +151,11 @@ def elapsed_text(start_iso):
     hours, minutes = divmod(minutes, 60)
     days, hours = divmod(hours, 24)
 
-    if days:
-        return f"{days}d {hours}h {minutes}m after MAMA Day 1 began"
-    return f"{hours}h {minutes}m after MAMA Day 1 began"
+    elapsed = f"{days}d {hours}h {minutes}m" if days else f"{hours}h {minutes}m"
+    return f"{elapsed} after MAMA {day} began"
 
 
 def percentage_tenths(values, total):
-    """Allocate one-decimal percentage units with largest remainders.
-
-    The returned integers are tenths of a percent and always sum to 1000
-    when total is positive, avoiding visible rounding drift.
-    """
     if total <= 0:
         return [0 for _ in values]
 
@@ -212,14 +206,19 @@ def build_stats(entries, found, config):
         act["rank"] = rank
 
     total_views = sum(act["views"] for act in acts)
-    for act, share_tenths in zip(acts, percentage_tenths(
-        [act["views"] for act in acts], total_views
-    )):
+    for act, share_tenths in zip(
+        acts, percentage_tenths([act["views"] for act in acts], total_views)
+    ):
         act["share_tenths"] = share_tenths
 
     now = datetime.now(timezone.utc)
-    kst = now.astimezone(__import__("datetime").timezone(__import__("datetime").timedelta(hours=9)))
+    kst = now.astimezone(timezone(timedelta(hours=9)))
     updated_kst_text = kst.strftime("%-d %b at %H:%M KST")
+
+    start_key = f"{config['day'].lower().replace(' ', '')}_start_kst"
+    start_iso = config.get(start_key) or config.get("day1_start_kst")
+    if not start_iso:
+        fail(f"falta {start_key} en config.json")
 
     return {
         "demo": False,
@@ -227,7 +226,7 @@ def build_stats(entries, found, config):
         "day": config["day"],
         "updated": now.isoformat().replace("+00:00", "Z"),
         "updated_kst_text": updated_kst_text,
-        "hours_since_start_text": elapsed_text(config["day1_start_kst"]),
+        "hours_since_start_text": elapsed_text(start_iso, config["day"]),
         "total_views": total_views,
         "total_collaboration_views": sum(act["collab_views"] for act in acts),
         "total_videos": len(entries),
@@ -238,7 +237,9 @@ def build_stats(entries, found, config):
 
 def atomic_write(data):
     os.makedirs(os.path.dirname(OUTPUT), exist_ok=True)
-    fd, temp_path = tempfile.mkstemp(prefix="stats.", suffix=".json", dir=os.path.dirname(OUTPUT))
+    fd, temp_path = tempfile.mkstemp(
+        prefix="stats.", suffix=".json", dir=os.path.dirname(OUTPUT)
+    )
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as fh:
             json.dump(data, fh, ensure_ascii=False, indent=2)
@@ -263,14 +264,17 @@ def main():
     except Exception as exc:
         fail(f"no se pudo leer config.json: {exc}")
 
-    if not config.get("event") or not config.get("day") or not config.get("day1_start_kst"):
-        fail("config.json debe contener event, day y day1_start_kst")
+    if not config.get("event") or not config.get("day"):
+        fail("config.json debe contener event y day")
 
     entries = load_videos()
     found = fetch_all(entries, api_key)
     stats = build_stats(entries, found, config)
     atomic_write(stats)
-    print(f"OK: {stats['total_videos']} videos, {stats['total_acts']} acts, {stats['total_views']:,} views")
+    print(
+        f"OK: {stats['total_videos']} videos, {stats['total_acts']} acts, "
+        f"{stats['total_views']:,} views"
+    )
 
 
 if __name__ == "__main__":
