@@ -3,7 +3,8 @@ name: Update MAMA stats
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"
+    # Avoid GitHub's busiest minute (:00 and :30) to reduce schedule delays.
+    - cron: "7,37 * * * *"
   push:
     branches: [main]
     paths:
