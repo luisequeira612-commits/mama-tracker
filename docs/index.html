@@ -119,7 +119,9 @@
     .growth-note { margin-top: 5px; color: var(--muted); font-size: 10px; line-height: 1.4; }
     .artist { display: flex; flex-direction: column; gap: 4px; }
     .artist-name { color: var(--gold); font: italic 700 clamp(23px, 6vw, 34px)/1.05 "Cormorant Garamond", serif; overflow-wrap: anywhere; }
-    .artist-growth, .row-growth { color: #d9b7ef; font: 500 10px/1.35 Inter, system-ui, sans-serif; letter-spacing: 0; }
+    .artist-growth, .row-growth { color: #63d68b; font: 500 10px/1.35 Inter, system-ui, sans-serif; letter-spacing: 0; }
+    .growth-negative { color: #e58a9a; }
+    .growth-neutral { color: var(--muted); }
     .row-growth { margin-top: 4px; }
     .collabs { margin-top: 30px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
     .collabs h2 { margin: 0; color: var(--gold); font: italic 600 27px/1.1 "Cormorant Garamond", serif; }
@@ -176,7 +178,8 @@
   function growthText(value) {
     const amount = Number(value) || 0;
     const sign = amount < 0 ? "−" : "+";
-    return sign + nf.format(Math.abs(amount)) + " en la última hora";
+    const arrow = amount < 0 ? "↘" : amount > 0 ? "↗" : "→";
+    return arrow + " " + sign + nf.format(Math.abs(amount)) + " vistas en la última hora";
   }
 
   function detail(act) {
@@ -263,8 +266,9 @@
     artist.appendChild(artistName);
     if (data.growth_available) {
       const growth = document.createElement("div");
-      growth.className = "artist-growth";
-      growth.textContent = growthText(first.views_gained_last_hour);
+      const growthAmount = Number(first.views_gained_last_hour) || 0;
+      growth.className = "artist-growth " + (growthAmount < 0 ? "growth-negative" : growthAmount > 0 ? "" : "growth-neutral");
+      growth.textContent = growthText(growthAmount);
       artist.appendChild(growth);
     }
 
@@ -321,8 +325,9 @@
       rowartist.textContent = act.artist;
       if (data.growth_available) {
         const growth = document.createElement("div");
-        growth.className = "row-growth";
-        growth.textContent = growthText(act.views_gained_last_hour);
+        const growthAmount = Number(act.views_gained_last_hour) || 0;
+        growth.className = "row-growth " + (growthAmount < 0 ? "growth-negative" : growthAmount > 0 ? "" : "growth-neutral");
+        growth.textContent = growthText(growthAmount);
         name.append(rowartist, growth);
       } else {
         name.appendChild(rowartist);
