@@ -59,7 +59,7 @@ https://luisequeira612-commits.github.io/mama-tracker/
 
 Edita `videos.txt`.
 
-Inventario combinado de Chapter 1 y Chapter 2. Los vídeos oficiales de ambos días se mantienen en `videos.txt` y forman un solo ranking. BABYMONSTER figura con **2 canciones, 2 vídeos y 1 colaboración**. El vídeo independiente `DOCKING COMPLETE` de Street World Fighter está separado de la colaboración con BABYMONSTER.
+Inventario combinado de Chapter 1 y Chapter 2: **69 vídeos oficiales únicos y 26 actos**, reconciliados con los uploads de Mnet incluidos en el tracker de referencia. Se incluyen las publicaciones de escenario completo y los cortes individuales oficiales; no se incluyen Shorts. Las versiones alternativas 4K cuentan como vídeos independientes cuando la referencia las incluye, pero usan `songs=0` para no duplicar canciones. Las colaboraciones se atribuyen al acto principal que Mnet acredita primero. Taeyang se agrupa bajo BIGBANG en el vídeo compartido, y el corte de I.O.I se mantiene como acto independiente. BABYMONSTER figura con **2 canciones, 2 vídeos y 1 colaboración**; `DOCKING COMPLETE` de Street World Fighter sigue separado de la colaboración con BABYMONSTER.
 
 Formato:
 
@@ -96,7 +96,7 @@ La API usa `videos.list` para obtener estadísticas.
 - Cada lote de hasta 50 IDs cuesta 1 unidad de cuota.
 - Hasta 50 IDs caben en una sola llamada.
 - La cuota estándar gratuita de YouTube Data API es de 10.000 unidades/día.
-- Con los 36 vídeos actuales de Chapter 1, cada actualización programada usa 1 unidad.
+- Con 69 vídeos, cada actualización programada usa 2 unidades (un lote de 50 y otro de 19).
 
 ## Seguridad y datos
 
