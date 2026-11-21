@@ -86,7 +86,9 @@ Ve a:
 
 **Actions → Update MAMA stats → Run workflow**
 
-El Worker de Cloudflare inicia este mismo workflow cada 30 minutos. Los cambios en `videos.txt` o `config.json` también lo ejecutan automáticamente.\n\nLa configuración del Worker y los pasos para desplegarlo están en [docs/CLOUDFLARE-SCHEDULER.md](docs/CLOUDFLARE-SCHEDULER.md).
+El Worker de Cloudflare inicia este mismo workflow cada 30 minutos. Los cambios en `videos.txt` o `config.json` también lo ejecutan automáticamente.
+
+La configuración del Worker y los pasos para desplegarlo están en [docs/CLOUDFLARE-SCHEDULER.md](docs/CLOUDFLARE-SCHEDULER.md).
 
 ## Cuota
 
@@ -99,7 +101,9 @@ La API usa `videos.list` para obtener estadísticas.
 
 ## Seguridad y datos
 
-- La API key vive únicamente en el secret `YT_API_KEY` de GitHub.\n- El token de GitHub para el Worker se guarda como secreto `GITHUB_TOKEN` en Cloudflare y solo tiene permiso Actions: write en este repositorio.\n- El Worker solo inicia el workflow; no recibe la API key de YouTube ni procesa estadísticas.
+- La API key vive únicamente en el secret `YT_API_KEY` de GitHub.
+- El token de GitHub para el Worker se guarda como secreto `GITHUB_TOKEN` en Cloudflare y solo tiene permiso Actions: write en este repositorio.
+- El Worker solo inicia el workflow; no recibe la API key de YouTube ni procesa estadísticas.
 - `docs/stats.json` contiene datos públicos de estadísticas.
 - Si una actualización falla, el script no reemplaza unos datos buenos por un archivo vacío o parcial.
 
@@ -114,6 +118,9 @@ videos.txt
 config.json
 scripts/update.py
 tests/test_update.py
+cloudflare/worker.js
+wrangler.toml
+docs/CLOUDFLARE-SCHEDULER.md
 docs/index.html
 docs/stats.json
 .github/workflows/update.yml
