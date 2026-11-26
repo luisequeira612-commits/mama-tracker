@@ -2,16 +2,16 @@
   "demo": false,
   "event": "MAMA 2026",
   "day": "Day 1 + Day 2",
-  "updated": "2026-11-26T03:45:44.198115Z",
-  "updated_kst_text": "26 Nov at 12:45 KST",
-  "total_views": 86524366,
-  "total_collaboration_views": 14626605,
+  "updated": "2026-11-26T04:00:44.717375Z",
+  "updated_kst_text": "26 Nov at 13:00 KST",
+  "total_views": 86573115,
+  "total_collaboration_views": 14632070,
   "total_videos": 69,
   "total_acts": 26,
   "acts": [
     {
       "artist": "BIGBANG",
-      "views": 12149424,
+      "views": 12159299,
       "songs": 3,
       "videos": 4,
       "collabs": 0,
@@ -20,91 +20,91 @@
         {
           "id": "FGBnglnOBsE",
           "title": "[#2026MAMA] 태양 - BAD + LIVE FAST DIE SLOW | Mnet 261121 방송",
-          "views": 193062,
+          "views": 193116,
           "collab": false
         },
         {
           "id": "f0-Oq0kh298",
           "title": "[#2026MAMA] BIGBANG (빅뱅) - BAD + LIVE FAST DIE SLOW + 기립 (GiiiRIP) + BiiiG | Mnet 261121 방송",
-          "views": 6603477,
+          "views": 6606424,
           "collab": false
         },
         {
           "id": "FHl9ST9GaKE",
           "title": "[#2026MAMA] BIGBANG (빅뱅) - 기립 (GiiiRIP) | Mnet 261121 방송",
-          "views": 2994608,
+          "views": 2997546,
           "collab": false
         },
         {
           "id": "WLhXrEjMAZE",
           "title": "[#2026MAMA] BIGBANG (빅뱅) - BiiiG | Mnet 261121 방송",
-          "views": 2358277,
+          "views": 2362213,
           "collab": false
         }
       ],
       "rank": 1,
       "share_tenths": 140,
-      "views_gained_last_hour": 39395
+      "views_gained_last_hour": 41767
     },
     {
       "artist": "BABYMONSTER",
-      "views": 9844591,
+      "views": 9851015,
       "songs": 2,
       "videos": 2,
       "collabs": 1,
-      "collab_views": 3469118,
+      "collab_views": 3469851,
       "video_list": [
         {
           "id": "iIaw6HvS09Y",
           "title": "[#2026MAMA] BABYMONSTER - INTRO + DESERVE + 춤(CHOOM) (MAMA Ver.) | Mnet 261120 방송",
-          "views": 6375473,
+          "views": 6381164,
           "collab": false
         },
         {
           "id": "3JvKNtTN3jk",
           "title": "[#2026MAMA] 스트릿 월드 파이터 : 디렉터스 워 X BABYMONSTER - ‘A MUSIC INTERSTELLAR’ | Mnet 261120 방송",
-          "views": 3469118,
+          "views": 3469851,
           "collab": true
         }
       ],
       "rank": 2,
       "share_tenths": 114,
-      "views_gained_last_hour": 17071
+      "views_gained_last_hour": 18376
     },
     {
       "artist": "CL",
-      "views": 8872112,
+      "views": 8877437,
       "songs": 4,
       "videos": 3,
       "collabs": 1,
-      "collab_views": 3849702,
+      "collab_views": 3851358,
       "video_list": [
         {
           "id": "bLzWombcRLU",
           "title": "[#2026MAMA] CL - SAY IT TO MY FACE + ICONIC (MAMA Ver.) | Mnet 261120 방송",
-          "views": 1036086,
+          "views": 1037231,
           "collab": false
         },
         {
           "id": "4Y_tDLBs8Pw",
           "title": "[#2026MAMA] CL - Fire + 내가 제일 잘 나가 (MAMA Ver.) | Mnet 261120 방송",
-          "views": 3986324,
+          "views": 3988848,
           "collab": false
         },
         {
           "id": "_Kfx4L0p3SI",
           "title": "[#2026MAMA] CL X ALLDAY PROJECT - ‘STILL THE BADDEST’ | Mnet 261120 방송",
-          "views": 3849702,
+          "views": 3851358,
           "collab": true
         }
       ],
       "rank": 3,
       "share_tenths": 103,
-      "views_gained_last_hour": 17989
+      "views_gained_last_hour": 19639
     },
     {
       "artist": "ILLIT",
-      "views": 5807598,
+      "views": 5810386,
       "songs": 3,
       "videos": 3,
       "collabs": 0,
@@ -113,29 +113,29 @@
         {
           "id": "a7xzBj-vYQ8",
           "title": "[#2026MAMA] 아일릿 (ILLIT) - It′s Me (MAMA Ver.) + D.B : SECRET AGENT + 체포하겠어 | Mnet 261120 방송",
-          "views": 5018176,
+          "views": 5020080,
           "collab": false
         },
         {
           "id": "_IX6zWGr9gk",
           "title": "[#2026MAMA] 아일릿 (ILLIT) - INTRO + It′s Me (MAMA Ver.) | Mnet 261120 방송",
-          "views": 600017,
+          "views": 600846,
           "collab": false
         },
         {
           "id": "26Jb6BZ2ga4",
           "title": "[#2026MAMA] 아일릿 (ILLIT) - D.B : SECRET AGENT + 체포하겠어 | Mnet 261120 방송",
-          "views": 189405,
+          "views": 189460,
           "collab": false
         }
       ],
       "rank": 4,
       "share_tenths": 67,
-      "views_gained_last_hour": 11326
+      "views_gained_last_hour": 11223
     },
     {
       "artist": "RESCENE",
-      "views": 5191679,
+      "views": 5194543,
       "songs": 2,
       "videos": 3,
       "collabs": 0,
@@ -144,29 +144,29 @@
         {
           "id": "XW0jCabK8vU",
           "title": "[#2026MAMA] RESCENE (리센느) - With (MAMA Ver.) + LOVE ATTACK (MAMA Ver.) | Mnet 261120 방송",
-          "views": 4164651,
+          "views": 4166735,
           "collab": false
         },
         {
           "id": "FzC51U9aB4s",
           "title": "[#2026MAMA] RESCENE (리센느) - With (MAMA Ver.) | Mnet 261120 방송",
-          "views": 319179,
+          "views": 319265,
           "collab": false
         },
         {
           "id": "Nja097GTVXE",
           "title": "[#2026MAMA] RESCENE (리센느) - LOVE ATTACK (MAMA Ver.) | Mnet 261120 방송",
-          "views": 707849,
+          "views": 708543,
           "collab": false
         }
       ],
       "rank": 5,
       "share_tenths": 60,
-      "views_gained_last_hour": 9652
+      "views_gained_last_hour": 10991
     },
     {
       "artist": "CORTIS",
-      "views": 5101369,
+      "views": 5104111,
       "songs": 2,
       "videos": 3,
       "collabs": 0,
@@ -175,29 +175,29 @@
         {
           "id": "ust4rA6wK9E",
           "title": "[#2026MAMA] CORTIS - REDRED + TNT | Mnet 261121 방송",
-          "views": 4410829,
+          "views": 4412983,
           "collab": false
         },
         {
           "id": "E6enZitPATw",
           "title": "[#2026MAMA] CORTIS - REDRED | Mnet 261121 방송",
-          "views": 467209,
+          "views": 467498,
           "collab": false
         },
         {
           "id": "37sl4AGWO9Q",
           "title": "[#2026MAMA] CORTIS - TNT | Mnet 261121 방송",
-          "views": 223331,
+          "views": 223630,
           "collab": false
         }
       ],
       "rank": 6,
       "share_tenths": 59,
-      "views_gained_last_hour": 8620
+      "views_gained_last_hour": 9747
     },
     {
       "artist": "ENHYPEN",
-      "views": 5070440,
+      "views": 5072528,
       "songs": 4,
       "videos": 5,
       "collabs": 0,
@@ -206,41 +206,41 @@
         {
           "id": "rBbQ32y7Xm0",
           "title": "[#2026MAMA] ENHYPEN (엔하이픈) - Bloody Paradise | Mnet 261120 방송",
-          "views": 587969,
+          "views": 588367,
           "collab": false
         },
         {
           "id": "glURXZmyTI8",
           "title": "[#2026MAMA] ENHYPEN (엔하이픈) - Big Girls Don't Cry + Knife | Mnet 261120 방송",
-          "views": 606494,
+          "views": 606976,
           "collab": false
         },
         {
           "id": "mYuGfSa1E6A",
           "title": "[#2026MAMA] ENHYPEN (엔하이픈) - I Want You | Mnet 261120 방송",
-          "views": 348251,
+          "views": 348447,
           "collab": false
         },
         {
           "id": "n9iu72mjil0",
           "title": "[#2026MAMA] ENHYPEN (엔하이픈) - ‘PARADISE X DUNE’ | Mnet 261120 방송",
-          "views": 3004323,
+          "views": 3005178,
           "collab": false
         },
         {
           "id": "BaDslhYJRp4",
           "title": "[4K] [#2026MAMA] ENHYPEN (엔하이픈) - ‘PARADISE X DUNE’",
-          "views": 523403,
+          "views": 523560,
           "collab": false
         }
       ],
       "rank": 7,
       "share_tenths": 59,
-      "views_gained_last_hour": 8562
+      "views_gained_last_hour": 9124
     },
     {
       "artist": "LE SSERAFIM",
-      "views": 4403243,
+      "views": 4405135,
       "songs": 2,
       "videos": 3,
       "collabs": 0,
@@ -249,29 +249,29 @@
         {
           "id": "o0MlNWgDjaM",
           "title": "[#2026MAMA] LE SSERAFIM - Saki + SPAGHETTI (MAMA Ver.) | Mnet 261121 방송",
-          "views": 3719035,
+          "views": 3720431,
           "collab": false
         },
         {
           "id": "Yq8rkM9PR_c",
           "title": "[#2026MAMA] LE SSERAFIM - SPAGHETTI (MAMA Ver.) | Mnet 261121 방송",
-          "views": 474153,
+          "views": 474490,
           "collab": false
         },
         {
           "id": "sOh8cxcu820",
           "title": "[#2026MAMA] LE SSERAFIM - Intro + Saki | Mnet 261121 방송",
-          "views": 210055,
+          "views": 210214,
           "collab": false
         }
       ],
       "rank": 8,
       "share_tenths": 51,
-      "views_gained_last_hour": 6939
+      "views_gained_last_hour": 7514
     },
     {
       "artist": "IVE",
-      "views": 3969709,
+      "views": 3972304,
       "songs": 3,
       "videos": 3,
       "collabs": 0,
@@ -280,29 +280,29 @@
         {
           "id": "oRA3eTWh5Jk",
           "title": "[#2026MAMA] IVE - SNAKESKIN + BLACKHOLE + BANG BANG | Mnet 261121 방송",
-          "views": 3239859,
+          "views": 3242063,
           "collab": false
         },
         {
           "id": "Luov2TyDRKo",
           "title": "[#2026MAMA] IVE - BANG BANG | Mnet 261121 방송",
-          "views": 499554,
+          "views": 499895,
           "collab": false
         },
         {
           "id": "wX93GGEMwgI",
           "title": "[#2026MAMA] IVE - SNAKESKIN + BLACKHOLE | Mnet 261121 방송",
-          "views": 230296,
+          "views": 230346,
           "collab": false
         }
       ],
       "rank": 9,
       "share_tenths": 46,
-      "views_gained_last_hour": 10000
+      "views_gained_last_hour": 9652
     },
     {
       "artist": "Hearts2Hearts",
-      "views": 3953797,
+      "views": 3955790,
       "songs": 2,
       "videos": 3,
       "collabs": 0,
@@ -311,29 +311,29 @@
         {
           "id": "9KPXhIiRn2U",
           "title": "[#2026MAMA] Hearts2Hearts - ICONIC HEART (Korean Ver.) + RUDE! (MAMA Ver.) | Mnet 261120 방송",
-          "views": 3384544,
+          "views": 3385976,
           "collab": false
         },
         {
           "id": "i6bW_HTcYeM",
           "title": "[#2026MAMA] Hearts2Hearts - ICONIC HEART (Korean Ver.) | Mnet 261120 방송",
-          "views": 228132,
+          "views": 228512,
           "collab": false
         },
         {
           "id": "sLYoWIWTZ8U",
           "title": "[#2026MAMA] Hearts2Hearts - RUDE! (MAMA Ver.) | Mnet 261120 방송",
-          "views": 341121,
+          "views": 341302,
           "collab": false
         }
       ],
       "rank": 10,
       "share_tenths": 46,
-      "views_gained_last_hour": 6642
+      "views_gained_last_hour": 7620
     },
     {
       "artist": "NAYEON",
-      "views": 3127699,
+      "views": 3129029,
       "songs": 3,
       "videos": 3,
       "collabs": 0,
@@ -342,29 +342,29 @@
         {
           "id": "XlDMWVqYfqg",
           "title": "[#2026MAMA] 나연 (TWICE) - POP! (Intro) + BABY ANGEL + ABCD (MAMA Ver.) | Mnet 261121 방송",
-          "views": 2861689,
+          "views": 2862911,
           "collab": false
         },
         {
           "id": "1XFI-qTSt_c",
           "title": "[#2026MAMA] 나연 (TWICE) - POP! (Intro) + BABY ANGEL | Mnet 261121 방송",
-          "views": 145919,
+          "views": 145979,
           "collab": false
         },
         {
           "id": "MA3IESn9Dqo",
           "title": "[#2026MAMA] 나연 (TWICE) - ABCD (MAMA Ver.) | Mnet 261121 방송",
-          "views": 120091,
+          "views": 120139,
           "collab": false
         }
       ],
       "rank": 11,
       "share_tenths": 36,
-      "views_gained_last_hour": 4561
+      "views_gained_last_hour": 4889
     },
     {
       "artist": "ALPHA DRIVE ONE",
-      "views": 3047646,
+      "views": 3048018,
       "songs": 3,
       "videos": 3,
       "collabs": 0,
@@ -373,29 +373,29 @@
         {
           "id": "TKwLRxhesnQ",
           "title": "[#2026MAMA] ALPHA DRIVE ONE - Diamond Hour + Raw Flame + BORN DIRE | Mnet 261120 방송",
-          "views": 950507,
+          "views": 950791,
           "collab": false
         },
         {
           "id": "mfzws4hBQ5Q",
           "title": "[#2026MAMA] ALPHA DRIVE ONE - Intro + Diamond Hour + Raw Flame | Mnet 261120 방송",
-          "views": 911103,
+          "views": 911144,
           "collab": false
         },
         {
           "id": "USErbT-TpMs",
           "title": "[#2026MAMA] ALPHA DRIVE ONE - BORN DIRE | Mnet 261120 방송",
-          "views": 1186036,
+          "views": 1186083,
           "collab": false
         }
       ],
       "rank": 12,
       "share_tenths": 35,
-      "views_gained_last_hour": 551
+      "views_gained_last_hour": 1358
     },
     {
       "artist": "TREASURE",
-      "views": 2845974,
+      "views": 2847386,
       "songs": 3,
       "videos": 4,
       "collabs": 0,
@@ -404,134 +404,134 @@
         {
           "id": "3D8IjUemw1c",
           "title": "[#2026MAMA] TREASURE (트레저) - IF I (MAMA Ver.) + FREE YØUR MIND + SHOCK (Band Ver.) | Mnet 261120 방송",
-          "views": 1855555,
+          "views": 1856561,
           "collab": false
         },
         {
           "id": "5jnLmnb7dZk",
           "title": "[#2026MAMA] TREASURE (트레저) - IF I (MAMA Ver.) | Mnet 261120 방송",
-          "views": 103547,
+          "views": 103589,
           "collab": false
         },
         {
           "id": "G0jizVgFNIM",
           "title": "[#2026MAMA] TREASURE (트레저) - FREE YØUR MIND + SHOCK (Band Ver.) | Mnet 261120 방송",
-          "views": 159020,
+          "views": 159086,
           "collab": false
         },
         {
           "id": "mYjA50Wy-Nc",
           "title": "[4K] [#2026MAMA] TREASURE (트레저) - IF I (MAMA Ver.) + FREE YØUR MIND + SHOCK (Band Ver.)",
-          "views": 727852,
+          "views": 728150,
           "collab": false
         }
       ],
       "rank": 13,
       "share_tenths": 33,
-      "views_gained_last_hour": 4493
+      "views_gained_last_hour": 4724
     },
     {
       "artist": "PANIC",
-      "views": 2102225,
+      "views": 2102653,
       "songs": 2,
       "videos": 4,
       "collabs": 4,
-      "collab_views": 2102225,
+      "collab_views": 2102653,
       "video_list": [
         {
           "id": "FELp5S31uJU",
           "title": "[#2026MAMA] 패닉, 마틴, 성현 (CORTIS) - 왼손잡이 | Mnet 261120 방송",
-          "views": 1105870,
+          "views": 1106139,
           "collab": true
         },
         {
           "id": "BEOkuAZwfXg",
           "title": "[#2026MAMA] 패닉, 김태래, 우찬, 유하, WOODZ - 내 낡은 서랍 속의 바다 | Mnet 261120 방송",
-          "views": 143572,
+          "views": 143625,
           "collab": true
         },
         {
           "id": "fyBnlSRxySg",
           "title": "[#2026MAMA] 패닉 X 김태래 X 마틴, 성현 X 우찬 X 유하 X WOODZ - 내 낡은 서랍 속의 바다 + 왼손잡이 | Mnet 261120 방송",
-          "views": 734464,
+          "views": 734558,
           "collab": true
         },
         {
           "id": "BmmpLVVcpZ0",
           "title": "[4K] [#2026MAMA] 패닉 X 김태래 X 마틴, 성현 X 우찬 X 유하 X WOODZ - 내 낡은 서랍 속의 바다 + 왼손잡이",
-          "views": 118319,
+          "views": 118331,
           "collab": true
         }
       ],
       "rank": 14,
       "share_tenths": 24,
-      "views_gained_last_hour": 1529
+      "views_gained_last_hour": 1615
     },
     {
       "artist": "izna",
-      "views": 2045209,
+      "views": 2045903,
       "songs": 6,
       "videos": 3,
       "collabs": 3,
-      "collab_views": 2045209,
+      "collab_views": 2045903,
       "video_list": [
         {
           "id": "Zg8RGFW3sr0",
           "title": "[#2026MAMA] izna X KiiiKiii X 아이오아이 (나영, 유정, 전소미) - 'GIRLS NEVER STOP' | Mnet 261121 방송",
-          "views": 1415660,
+          "views": 1416082,
           "collab": true
         },
         {
           "id": "6E0VuaxUoQE",
           "title": "[#2026MAMA] izna X KiiiKiii - Bad Girl Good Girl + The Boys + 라비앙로즈(La Vie en Rose) | Mnet 261121 방송",
-          "views": 257147,
+          "views": 257255,
           "collab": true
         },
         {
           "id": "w3Tbt_CMvXs",
           "title": "[#2026MAMA] izna X KiiiKiii - 404 (New Era) (MAMA Ver.) + METRONOME (MAMA Ver.) | Mnet 261121 방송",
-          "views": 372402,
+          "views": 372566,
           "collab": true
         }
       ],
       "rank": 15,
       "share_tenths": 24,
-      "views_gained_last_hour": 2624
+      "views_gained_last_hour": 2885
     },
     {
       "artist": "LNGSHOT X MODYSSEY X TUIDE",
-      "views": 1933806,
+      "views": 1934546,
       "songs": 5,
       "videos": 3,
       "collabs": 3,
-      "collab_views": 1933806,
+      "collab_views": 1934546,
       "video_list": [
         {
           "id": "2UitQkvkNqI",
           "title": "[#2026MAMA] LNGSHOT X MODYSSEY (모디세이) X TUIDE - ‘NEW STAR WARS’ | Mnet 261120 방송",
-          "views": 1240860,
+          "views": 1241147,
           "collab": true
         },
         {
           "id": "zWcqximR6T0",
           "title": "[#2026MAMA] LNGSHOT X MODYSSEY (모디세이) X TUIDE - That That (원곡 : 싸이 (PSY)) | Mnet 261120 방송",
-          "views": 359013,
+          "views": 359417,
           "collab": true
         },
         {
           "id": "0lJNbLrUecg",
           "title": "[#2026MAMA] LNGSHOTXMODYSSEYXTUIDE - Bananas(MAMA Ver.)+HOOK+타!+SUN KISS(MAMA Ver.) | Mnet 261120 방송",
-          "views": 333933,
+          "views": 333982,
           "collab": true
         }
       ],
       "rank": 16,
       "share_tenths": 22,
-      "views_gained_last_hour": 2897
+      "views_gained_last_hour": 2846
     },
     {
       "artist": "HWASA",
-      "views": 1530079,
+      "views": 1531207,
       "songs": 2,
       "videos": 1,
       "collabs": 0,
@@ -540,17 +540,17 @@
         {
           "id": "vvJIhvxkAjo",
           "title": "[#2026MAMA] 화사 (HWASA) - So Cute + Good Goodbye | Mnet 261121 방송",
-          "views": 1530079,
+          "views": 1531207,
           "collab": false
         }
       ],
       "rank": 17,
       "share_tenths": 18,
-      "views_gained_last_hour": 3942
+      "views_gained_last_hour": 4139
     },
     {
       "artist": "ALLDAY PROJECT",
-      "views": 1010251,
+      "views": 1011323,
       "songs": 1,
       "videos": 1,
       "collabs": 0,
@@ -559,17 +559,17 @@
         {
           "id": "_a3wgovmNc8",
           "title": "[#2026MAMA] ALLDAY PROJECT - CRASH (MAMA Ver.) | Mnet 261120 방송",
-          "views": 1010251,
+          "views": 1011323,
           "collab": false
         }
       ],
       "rank": 18,
       "share_tenths": 12,
-      "views_gained_last_hour": 3589
+      "views_gained_last_hour": 4339
     },
     {
       "artist": "NCT WISH",
-      "views": 815339,
+      "views": 815623,
       "songs": 2,
       "videos": 3,
       "collabs": 0,
@@ -578,29 +578,29 @@
         {
           "id": "f5zeVTLO9sA",
           "title": "[#2026MAMA] NCT WISH - Everglow + I SPY (MAMA Ver.) | Mnet 261120 방송",
-          "views": 625348,
+          "views": 625544,
           "collab": false
         },
         {
           "id": "NwgEZfm9VFs",
           "title": "[#2026MAMA] NCT WISH - I SPY (MAMA Ver.) | Mnet 261120 방송",
-          "views": 120749,
+          "views": 120824,
           "collab": false
         },
         {
           "id": "f0BiLdY8LDE",
           "title": "[#2026MAMA] NCT WISH - Everglow | Mnet 261120 방송",
-          "views": 69242,
+          "views": 69255,
           "collab": false
         }
       ],
       "rank": 19,
       "share_tenths": 9,
-      "views_gained_last_hour": 1028
+      "views_gained_last_hour": 1241
     },
     {
       "artist": "&TEAM",
-      "views": 813953,
+      "views": 814464,
       "songs": 1,
       "videos": 1,
       "collabs": 0,
@@ -609,36 +609,36 @@
         {
           "id": "RsEfO9HD1-A",
           "title": "[#2026MAMA] &TEAM - Good Boy (MAMA Ver.) | Mnet 261121 방송",
-          "views": 813953,
+          "views": 814464,
           "collab": false
         }
       ],
       "rank": 20,
       "share_tenths": 9,
-      "views_gained_last_hour": 1915
+      "views_gained_last_hour": 1831
     },
     {
       "artist": "I.O.I",
-      "views": 744371,
+      "views": 745425,
       "songs": 0,
       "videos": 1,
       "collabs": 1,
-      "collab_views": 744371,
+      "collab_views": 745425,
       "video_list": [
         {
           "id": "ZIgbTMs1eX0",
           "title": "[#2026MAMA] 아이오아이 (나영, 유정, 전소미) X izna X KiiiKiii - 갑자기 | Mnet 261121 방송",
-          "views": 744371,
+          "views": 745425,
           "collab": true
         }
       ],
       "rank": 21,
       "share_tenths": 9,
-      "views_gained_last_hour": 3549
+      "views_gained_last_hour": 3665
     },
     {
       "artist": "KO1KEYZ",
-      "views": 706290,
+      "views": 706789,
       "songs": 3,
       "videos": 3,
       "collabs": 0,
@@ -647,54 +647,54 @@
         {
           "id": "YIMaI1j6l-8",
           "title": "[#2026MAMA] KO1KEYZ - '우리는 지금 신세계로 간다 (僕らは今、新世界へ)' | Mnet 261121 방송",
-          "views": 406535,
+          "views": 406815,
           "collab": false
         },
         {
           "id": "7zAjKMijlWU",
           "title": "[#2026MAMA] KO1KEYZ - White Love (Korean ver.) | Mnet 261121 방송",
-          "views": 200835,
+          "views": 201010,
           "collab": false
         },
         {
           "id": "2c62JSYxXnA",
           "title": "[#2026MAMA] KO1KEYZ - 新世界(SHINSEKAI) + KO1KEYZ (Korean ver.) | Mnet 261121 방송",
-          "views": 98920,
+          "views": 98964,
           "collab": false
         }
       ],
       "rank": 22,
       "share_tenths": 8,
-      "views_gained_last_hour": 2424
+      "views_gained_last_hour": 2032
     },
     {
       "artist": "WOODZ",
-      "views": 617046,
+      "views": 617303,
       "songs": 1,
       "videos": 2,
       "collabs": 1,
-      "collab_views": 482174,
+      "collab_views": 482334,
       "video_list": [
         {
           "id": "b-ivUp5KmrU",
           "title": "[#2026MAMA] WOODZ - Come into my world! | Mnet 261121 방송",
-          "views": 134872,
+          "views": 134969,
           "collab": false
         },
         {
           "id": "dRMoSstqGqw",
           "title": "[#2026MAMA] WOODZ, 화사 (HWASA) - Come into my world! + So Cute + Good Goodbye | Mnet 261121 방송",
-          "views": 482174,
+          "views": 482334,
           "collab": true
         }
       ],
       "rank": 23,
       "share_tenths": 7,
-      "views_gained_last_hour": 1010
+      "views_gained_last_hour": 1090
     },
     {
       "artist": "ZEROBASEONE",
-      "views": 380632,
+      "views": 380779,
       "songs": 4,
       "videos": 3,
       "collabs": 0,
@@ -703,29 +703,29 @@
         {
           "id": "Rf0sUnTXr34",
           "title": "[#2026MAMA] ZEROBASEONE (제로베이스원) - RUN (with 다이나믹 듀오) + UNDEAD + The Next Course | Mnet 261121 방송",
-          "views": 47006,
+          "views": 47020,
           "collab": false
         },
         {
           "id": "O6qTamopoMI",
           "title": "[#2026MAMA] ZEROBASEONE (제로베이스원) - TOP 5 | Mnet 261121 방송",
-          "views": 59578,
+          "views": 59607,
           "collab": false
         },
         {
           "id": "2_VEINOSqtE",
           "title": "[#2026MAMA] ZEROBASEONE (제로베이스원) - 'The Next Course' | Mnet 261121 방송",
-          "views": 274048,
+          "views": 274152,
           "collab": false
         }
       ],
       "rank": 24,
       "share_tenths": 4,
-      "views_gained_last_hour": 470
+      "views_gained_last_hour": 663
     },
     {
       "artist": "INI",
-      "views": 246779,
+      "views": 246885,
       "songs": 2,
       "videos": 1,
       "collabs": 0,
@@ -734,17 +734,17 @@
         {
           "id": "7x1ANdAOjIY",
           "title": "[#2026MAMA] INI - You Know What To Do (MAMA Ver.) + All 4 U (MAMA Ver.) | Mnet 261120 방송",
-          "views": 246779,
+          "views": 246885,
           "collab": false
         }
       ],
       "rank": 25,
       "share_tenths": 3,
-      "views_gained_last_hour": 472
+      "views_gained_last_hour": 467
     },
     {
       "artist": "STREET WORLD FIGHTER",
-      "views": 193105,
+      "views": 193234,
       "songs": 1,
       "videos": 1,
       "collabs": 0,
@@ -753,17 +753,17 @@
         {
           "id": "7IzRrfKEfpw",
           "title": "[#2026MAMA] 스트릿 월드 파이터 : 디렉터스 워 - DOCKING COMPLETE | Mnet 261120 방송",
-          "views": 193105,
+          "views": 193234,
           "collab": false
         }
       ],
       "rank": 26,
       "share_tenths": 2,
-      "views_gained_last_hour": 509
+      "views_gained_last_hour": 496
     }
   ],
   "growth_available": true,
-  "growth_updated": "2026-11-26T03:00:51.475928Z",
-  "growth_updated_kst_text": "26 Nov at 12:00 KST",
-  "growth_checked_hour_kst": "2026-11-26 12"
+  "growth_updated": "2026-11-26T04:00:44.710906Z",
+  "growth_updated_kst_text": "26 Nov at 13:00 KST",
+  "growth_checked_hour_kst": "2026-11-26 13"
 }
